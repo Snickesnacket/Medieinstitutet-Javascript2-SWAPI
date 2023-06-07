@@ -1,4 +1,4 @@
-import {  useEffect, useState } from 'react'
+import {  useRef, useEffect, useState } from 'react'
 import Alert from 'react-bootstrap/Alert'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
@@ -91,6 +91,7 @@ const SearchPage = () => {
 						{searchResult.data.map(data => (
 							<ListGroup.Item
 								action
+								href={''}
 								key={data.id}
 							>
 								<h2 className="h3">{data.name}</h2>
