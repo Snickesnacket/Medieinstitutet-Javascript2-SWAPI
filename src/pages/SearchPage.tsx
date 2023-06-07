@@ -4,8 +4,9 @@ import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import ListGroup from 'react-bootstrap/ListGroup'
 import { srchResponse } from '../types'
-import { search } from '../services/SWAPI'
+
 import { useSearchParams } from 'react-router-dom'
+import { getAll } from '../services/SWAPI'
 
 const SearchPage = () => {
 	const [error, setError] = useState<string | null>(null)
@@ -16,13 +17,14 @@ const SearchPage = () => {
 
 
 	const query = searchParams.get("query")
+
 	const Searchfunc = async (searchQuery: string) => {
 		setError(null)
 		setLoading(true)
 		setSearchResult(null)
 
 		try {
-			const res = await search(searchQuery)
+			const res = await getAll<srchResponse>(searchQuery)
 			setSearchResult(res)
 
 			// eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -36,7 +38,6 @@ const SearchPage = () => {
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault()
 
-		// haxx0r
 		if (!searchInput.trim().length) {
 			return
 		}
@@ -101,6 +102,15 @@ const SearchPage = () => {
 							</ListGroup.Item>
 						))}
 					</ListGroup>
+{/* 
+						<Pagination
+						page={searchResult.current_page + 1}
+						totalPages={searchResult.nbPages}
+						hasPreviousPage={page > 0}
+						hasNextPage={page + 1 < searchResult.nbPages}
+						onPreviousPage={() => { setPage(prevValue => prevValue - 1) }}
+						onNextPage={() => { setPage(prevValue => prevValue + 1) }}
+					/> */}
 				</div>
 			)}
 		</>

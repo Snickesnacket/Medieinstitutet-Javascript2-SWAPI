@@ -4,9 +4,33 @@ import Alert from 'react-bootstrap/Alert'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import ListGroup from 'react-bootstrap/ListGroup'
+import { srchResponse } from '../types'
+import {  getAllPlanets } from '../services/SWAPI'
 
 
-export const PeoplePage = () => {
+export const FilmPage = async () => {
+    const [error, setError] = useState<string|null>(null)
+	const [loading, setLoading] = useState(true)
+    const [planets, setPlanets] = useState< srchResponse|null>()
+
+	const getPlanets = async () => {
+			setError(null)
+            setLoading(true)
+
+        try{
+            const res = await getAllPlanets<srchResponse>()
+            setPlanets(res)
+            console.log(res.data)
+
+        }catch (err: any) {
+            setError(err.message)
+        }
+    }
+
+    useEffect(() => {
+        getPlanets()
+    },[])
+
   return (
     <>
 			<h1>Search result</h1>
@@ -34,4 +58,4 @@ export const PeoplePage = () => {
   )
 }
 
-export default PeoplePage
+export default FilmPage
