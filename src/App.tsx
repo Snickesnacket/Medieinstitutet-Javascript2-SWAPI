@@ -20,14 +20,14 @@ const App = () => {
 
 			<Container className="py-3">
 				<Routes>
-          <Route path="/" element={<HomePage />} />
+        <Route path="/" element={<HomePage />} />
 					<Route path="/search/" element={<SearchPage />} /> 
-          <Route path="/people/" element={<PeoplePage />} /> 
-          <Route path="/starships/" element={<StarshipsPage />} /> 
-          <Route path="/vehicles/" element={<VehiclesPage />} /> 
-          <Route path="/planets/" element={<PlanetsPage />} /> 
-          <Route path="/species/" element={<SpeciesPage />} /> 
-          <Route path="/films/" element={<FilmsPage />} /> 
+        <Route path="/people/" element={<PeoplePage />} /> 
+        <Route path="/starships/" element={<StarshipsPage />} /> 
+        <Route path="/vehicles/" element={<VehiclesPage />} /> 
+{/*           <Route path="/planets/" element={<PlanetsPage />} />  */}
+        <Route path="/species/" element={<SpeciesPage />} /> 
+        <Route path="/films/" element={<FilmsPage />} /> 
 					<Route path="*" element={<NotFound />} />
 				</Routes>
 			</Container>

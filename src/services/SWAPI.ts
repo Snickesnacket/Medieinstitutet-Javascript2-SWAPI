@@ -17,8 +17,8 @@ const BASE_URL = 'https://swapi.thehiveresistance.com/api'
  * @param {string} endpoint Endpoint to HTTP GET
  * @returns Promise
  */
-export const getAll= async <T>() => {
-	const response = await axios.get(`${BASE_URL}/people`)
+export const getAll= async <T>(resourceUrl: string, searchPage = 0 ) => {
+	const response = await axios.get(resourceUrl)
 	return response.data as T
 }
 

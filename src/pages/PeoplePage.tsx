@@ -1,49 +1,23 @@
-import React from 'react'
-import {  useRef, useEffect, useState } from 'react'
-import Alert from 'react-bootstrap/Alert'
-import Button from 'react-bootstrap/Button'
-import Form from 'react-bootstrap/Form'
-import ListGroup from 'react-bootstrap/ListGroup'
-
-import { getAll } from '../services/SWAPI'
-import { srchResponse } from '../types'
-
+import { ListGroup } from 'react-bootstrap'
+import  useGetData  from '../hooks/useGetData'
+import { useEffect } from 'react'
+import Pagination from '../components/Pagination'
 
 export const PeoplePage = () => {
-    const [error, setError] = useState<string|null>(null)
-	const [loading, setLoading] = useState(true)
-    const [people, setPeople] = useState< srchResponse|null>()
-  
+	const { data, setUrl, setPage } = useGetData('')
 
-    const getPeople = async () => {
-            setError(null)
-            setLoading(true)
+	useEffect(()=> {
+		setUrl('https://swapi.thehiveresistance.com/api/people/')
+	},[])
 
-        try{
-            const res = await getAll<srchResponse>()
-
-            setPeople(res)
-            console.log(res.data)
-
-        }catch (err: any) {
-            setError(err.message)
-        }
-    }
-
-    console.log(people)
-    useEffect(() => {
-        getPeople()
-    },[])
-
-    
 return (
     <>
 			<h1>All the people</h1>
             
-			{people && (
+			{data && (
 				<div id="search-result">
 					<ListGroup className="mb-3">
-						{people.data.map(data => (
+						{data.data.map(data => (
 							<ListGroup.Item
 								action
 								href={''}
@@ -56,6 +30,15 @@ return (
 							</ListGroup.Item>
 						))}
 					</ListGroup>
+
+					<Pagination
+						page={data.current_page + 1}
+						totalPages={data.total}
+						hasPreviousPage={data.current_page > 0}
+						hasNextPage={data.current_page + 1 < data.total}
+						onPreviousPage={() => { setPage(prevValue => prevValue - 1) }}
+						onNextPage={() => { setPage(prevValue => prevValue + 1) }}
+					/> 
 				</div>
 			)} 
 		</>
