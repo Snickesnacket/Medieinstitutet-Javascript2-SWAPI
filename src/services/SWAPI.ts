@@ -20,7 +20,7 @@ const BASE_URL = 'https://swapi.thehiveresistance.com/api'
  * @param {string} endpoint Endpoint to HTTP GET
  * @returns Promise
  */
-export const getAll= async ( endpoint: string, page = 0) => {
+export const getAll= async ( endpoint: string, page: number) => {
 		return get<srchResponse>(`/${endpoint}?page=${page}`)
 
 }
