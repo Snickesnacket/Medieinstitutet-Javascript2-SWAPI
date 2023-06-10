@@ -1,11 +1,10 @@
 import { useState, useEffect, useRef } from "react";
 import ListGroup from "react-bootstrap/ListGroup";
+import { Button } from "react-bootstrap";
 import { getAll } from "../services/SWAPI";
 import { srchResponse } from "../types";
 import Pagination from "../components/Pagination";
 import { useSearchParams } from "react-router-dom";
-
-
 
 export const PeoplePage = () => {
 const [error, setError] = useState<string | null>(null);
@@ -21,8 +20,6 @@ const getPeople = async (endpoint: string, searchPage: number) => {
     setError(null);
     setLoading(true);
 	setSearchResult(null)
-
-	
 
     try {
     const res = await getAll(endpoint, searchPage );
@@ -42,22 +39,31 @@ useEffect(() => {
 		return
 	}
     getPeople( endpoint, page);
-}, [page]);
+}, [page, endpoint ]);
 
 return (
     <>
     <h1>All the people</h1>
     {searchresult && (
         <div id="search-result">
-        <ListGroup className="mb-3">
+        <ListGroup className="mb-6">
             {searchresult.data.map((data) => (
             <ListGroup.Item action href={""} key={data.id}>
                 <h2 className="h3">{data.name}</h2>
 
                 <p className="text-muted small mb-0">
-                Height: {data.height} Date of birth: {data.birth_year} Created
-                at: {data.created}
+                Born: {data.birth_year} 
                 </p>
+
+                <p className="text-muted small mb-0">
+				height: {data.height} 
+                </p>
+
+				<Button
+				variant="success"
+				type="submit"
+
+			>Read more</Button>
             </ListGroup.Item>
             ))}
         </ListGroup>
