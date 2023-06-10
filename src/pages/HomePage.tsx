@@ -6,7 +6,9 @@ const HomePage = () => {
 		<>
 			<h1>Hello fella!</h1>
 
-	
+			<Link to="/search">
+				<Button variant="primary">Use the Search, you must!</Button>
+			</Link>
 		</>
 	)
 }

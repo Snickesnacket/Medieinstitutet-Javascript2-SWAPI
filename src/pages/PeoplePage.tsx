@@ -1,23 +1,21 @@
-import { ListGroup } from 'react-bootstrap'
-import  useGetData  from '../hooks/useGetData'
-import { useEffect } from 'react'
-import Pagination from '../components/Pagination'
+import React from 'react'
+import {  useRef, useEffect, useState } from 'react'
+import Alert from 'react-bootstrap/Alert'
+import Button from 'react-bootstrap/Button'
+import Form from 'react-bootstrap/Form'
+import ListGroup from 'react-bootstrap/ListGroup'
+
 
 export const PeoplePage = () => {
-	const { data, setUrl, setPage } = useGetData('')
-
-	useEffect(()=> {
-		setUrl('https://swapi.thehiveresistance.com/api/people/')
-	},[])
-
-return (
+  return (
     <>
-			<h1>All the people</h1>
-            
-			{data && (
+			<h1>Search result</h1>
+
+		{/* 	{searchResult && (
 				<div id="search-result">
+				<p>Showing search results for "{query}"...</p>
 					<ListGroup className="mb-3">
-						{data.data.map(data => (
+						{searchResult.data.map(data => (
 							<ListGroup.Item
 								action
 								href={''}
@@ -25,7 +23,7 @@ return (
 							>
 								<h2 className="h3">{data.name}</h2>
 								<p className="text-muted small mb-0">
-									Height: {data.height} Date of birth: {data.birth_year} Created at: {data.created}
+									{data.height} points by {data.birth_year} at {data.created}
 								</p>
 							</ListGroup.Item>
 						))}
@@ -40,9 +38,9 @@ return (
 						onNextPage={() => { setPage(prevValue => prevValue + 1) }}
 					/> 
 				</div>
-			)} 
+			)} */}
 		</>
-)
+  )
 }
 
 export default PeoplePage
