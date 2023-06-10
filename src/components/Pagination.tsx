@@ -28,7 +28,7 @@ const Pagination: React.FC<IPaginationProps> = ({
 				>Previous Page</Button>
 			</div>
 
-			<div className="page">Page {page} {totalPages}</div>
+			<div className="page">Page {page}/{totalPages}</div>
 
 			<div className="next">
 				<Button

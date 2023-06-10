@@ -4,7 +4,6 @@ import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import ListGroup from 'react-bootstrap/ListGroup'
 import { srchResponse } from '../types'
-import { search } from '../services/SWAPI'
 import { useSearchParams } from 'react-router-dom'
 
 const SearchPage = () => {
