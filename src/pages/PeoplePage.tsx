@@ -1,10 +1,11 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect,} from "react";
 import ListGroup from "react-bootstrap/ListGroup";
 import { Button } from "react-bootstrap";
 import { getAll } from "../services/SWAPI";
 import { srchResponse } from "../types";
 import Pagination from "../components/Pagination";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, Link, useLocation, } from "react-router-dom";
+
 
 export const PeoplePage = () => {
 const [error, setError] = useState<string | null>(null);
@@ -14,7 +15,11 @@ const [page, setPage] = useState(1)
 const [input, setInput] = useState('') //inputfält
 const  [searchresult, setSearchResult] = useState<srchResponse|null>(null) //svaret 
 const [searchParams, setSearchParams] = useSearchParams()// det som skrivs i url.
-const [endpoint, setEndpoint] = useState('people')
+/* const [searchParamsId, setSearchParamsId] = useSearchParams()// det som skrivs i url.
+const searchParamsId_person = searchParamsId.get('person')
+const person =Boolean(searchParamsId) */
+
+const [endpoint, setEndpoint] = useState('people') 
 
 const getPeople = async (endpoint: string, searchPage: number) => {
     setError(null);
@@ -48,7 +53,11 @@ return (
         <div id="search-result">
         <ListGroup className="mb-6">
             {searchresult.data.map((data) => (
-            <ListGroup.Item action href={""} key={data.id}>
+            <ListGroup.Item action 
+				as={Link}
+				key={data.id}
+				variant="success"
+				to={`/${data.id}`}>
                 <h2 className="h3">{data.name}</h2>
 
                 <p className="text-muted small mb-0">
@@ -59,11 +68,7 @@ return (
 				height: {data.height} 
                 </p>
 
-				<Button
-				variant="success"
-				type="submit"
-
-			>Read more</Button>
+				
             </ListGroup.Item>
             ))}
         </ListGroup>
