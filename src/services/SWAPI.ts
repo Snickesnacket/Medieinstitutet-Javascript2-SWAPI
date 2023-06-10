@@ -1,8 +1,7 @@
-import axios from "axios";
 import {srchResponse} from '../types/index'
 
 const instance = axios.create({
-	baseURL: "https://swapi.thehiveresistance.com/api.",
+	baseURL: "https://swapi.thehiveresistance.com/api",
 	timeout: 10000,
 	headers: {
 		"Content-Type": "application/json",
@@ -10,14 +9,20 @@ const instance = axios.create({
 	}
 })
 
+const BASE_URL = 'https://swapi.thehiveresistance.com/api'
 /**
  * Execute a HTTP GET request to an endpoint.
  *
  * @param {string} endpoint Endpoint to HTTP GET
  * @returns Promise
  */
-const get = async <T>(endpoint: string) => {
-	const response = await instance.get(endpoint)
+export const getAll= async <T>() => {
+	const response = await axios.get(`${BASE_URL}/people`)
+	return response.data as T
+}
+
+export const getAllPlanets= async <T>() => {
+	const response = await axios.get(`${BASE_URL}/planets`)
 	return response.data as T
 }
 
@@ -25,6 +30,3 @@ const get = async <T>(endpoint: string) => {
  * Search 
  * @returns Promise
  */
-export const search = async (query: string, page = 0) => {
-	return get<srchResponse>(`/search?query=${query}&tags=story&page=${page}`)
-}
