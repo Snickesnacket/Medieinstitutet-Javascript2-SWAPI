@@ -1,4 +1,4 @@
-import {srchResponse} from '../types/index'
+import {Person, srchResponse} from '../types/index'
 import axios from 'axios'
 
 const instance = axios.create({
@@ -13,6 +13,7 @@ const get = async <T>(endpoint: string) => {
 	const response = await instance.get(endpoint)
 	return response.data as T
 }
+
 const BASE_URL = 'https://swapi.thehiveresistance.com/api'
 /**
  * Execute a HTTP GET request to an endpoint.
@@ -25,8 +26,13 @@ export const getAll= async ( endpoint: string, page: number) => {
 
 }
 
+export const getId= async ( endpoint: string, id: number) => {
+		return get<srchResponse>(`/${endpoint}/${id}`)
+
+}
+
 export const getAllPlanets= async <T>() => {
-	const response = await axios.get(`${BASE_URL}/planets`)
+	const response = await axios.get(`${BASE_URL}/planets`) 
 	return response.data as T
 }
 
