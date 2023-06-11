@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
-import { Link, useNavigate, useParams,} from 'react-router-dom'
-import { Person, srchResponse } from '../types'
+import {  useParams,} from 'react-router-dom'
+import { Person} from '../types'
 import {  getId } from '../services/SWAPI'
 import ListGroup from 'react-bootstrap/esm/ListGroup'
 import ListGroupItem from 'react-bootstrap/esm/ListGroupItem'
@@ -11,7 +11,7 @@ const PersonPage = () => {
     const [person, setPerson] = useState<Person>()
     const { id } = useParams()
 	const personId = Number(id)
-    const [searchresult, setSearchresult] = useState<Person[]>()
+  
 
     const getPerson = async ( personId: number) => {
         setError(null)
@@ -70,4 +70,5 @@ const PersonPage = () => {
 
 }
 
-export default PersonPage
+ export default PersonPage
+
