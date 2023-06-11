@@ -2,7 +2,6 @@ import React from 'react'
 import Button from 'react-bootstrap/Button'
 
 interface IPaginationProps {
-	page: number
 	totalPages: number
 	hasPreviousPage: boolean
 	hasNextPage: boolean
@@ -11,7 +10,6 @@ interface IPaginationProps {
 }
 
 const Pagination: React.FC<IPaginationProps> = ({
-	page,
     totalPages,
 	hasPreviousPage,
 	hasNextPage,
@@ -28,7 +26,7 @@ const Pagination: React.FC<IPaginationProps> = ({
 				>Previous Page</Button>
 			</div>
 
-			<div className="page">Page {page}/{totalPages}</div>
+			
 
 			<div className="next">
 				<Button

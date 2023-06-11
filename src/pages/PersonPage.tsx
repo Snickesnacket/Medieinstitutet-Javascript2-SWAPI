@@ -2,10 +2,8 @@ import { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams,} from 'react-router-dom'
 import { Person, srchResponse } from '../types'
 import {  getId } from '../services/SWAPI'
-import { FALSE } from 'sass'
 import ListGroup from 'react-bootstrap/esm/ListGroup'
 import ListGroupItem from 'react-bootstrap/esm/ListGroupItem'
-
 
 const PersonPage = () => {
     const [error, setError] = useState<string|null>(null)
@@ -13,16 +11,15 @@ const PersonPage = () => {
     const [person, setPerson] = useState<Person>()
     const { id } = useParams()
 	const personId = Number(id)
-    const [endpoint, setEndpoint] = useState('people') 
     const [searchresult, setSearchresult] = useState<Person[]>()
 
-    const getPerson = async (endpoint: string, personId: number) => {
+    const getPerson = async ( personId: number) => {
         setError(null)
-        setLoading(false)
+        setLoading(true)
         console.log('hello there!')
 
         try {
-        const data = await getId(endpoint, personId)
+        const data = await getId('people', personId)
         console.log("the data",data)
         setPerson(data)
 
@@ -36,10 +33,7 @@ const PersonPage = () => {
     console.log("the outside")
 
     useEffect(() => {
-	if (typeof personId !== "number") {
-			return
-		}
-    getPerson(endpoint, personId)
+    getPerson( personId)
 }, [personId]);
 
     return (
@@ -56,6 +50,18 @@ const PersonPage = () => {
                         <p>Skincolor: {person.skin_color}</p>
                         <p>Created: {person.created}</p>
                         <p>Homeword: {person.homeworld.name}</p>
+                        <div> 
+                                <ListGroup className='mb-3'>
+                            
+                                    {person.films.map(film => (
+                                        <ListGroupItem
+                                            action
+                                            key={film.id}
+                                    ><p>{film.title}</p>
+                                    </ListGroupItem>
+                                    ))}
+                                </ListGroup>
+                            </div>
                         </div>
                 </div>
             )}

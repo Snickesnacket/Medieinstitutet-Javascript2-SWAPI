@@ -27,7 +27,7 @@ export const getAll= async ( endpoint: string, page: number) => {
 }
 
 export const getId= async ( endpoint: string, id: number) => {
-		return get<srchResponse>(`/${endpoint}/${id}`)
+		return get<Person>(`/${endpoint}/${id}`)
 
 }
 
