@@ -1,6 +1,6 @@
 import { useState, useEffect,} from "react";
 import ListGroup from "react-bootstrap/ListGroup";
-import { getAllFilms, getQueryFilm} from "../services/SWAPI";
+import { getAllMovies} from "../services/SWAPI";
 import { srchResponseFilm } from "../types";
 import Pagination from "../components/Pagination";
 import { useSearchParams, Link, } from "react-router-dom";
@@ -11,26 +11,26 @@ export const FilmsPage = () => {
 const [error, setError] = useState<string | null>(null);
 const [loading, setLoading] = useState(true)
 const  [data, setData] = useState<srchResponseFilm|null>(null) //svaret 
-const [searchParams, setSearchParams] = useSearchParams({page:'1'})
-const [queryParams, setQueryParams] = useSearchParams('')
+const [searchParams, setSearchParams] = useSearchParams({query: '', page:'1'})
 const [searchResult, setSearchResult] = useState<srchResponseFilm|null>(null)
-const param = searchParams.get('page')
-const query = queryParams.get('query')
+const page = searchParams.get('page'|| "1")
+const query = searchParams.get('query')
 const [searchInput, setSearchInput] = useState('')
 
-const paramnumber = Number(param)
+const pageNumber = Number(page)
 
-const getFilm = async (searchQuery: string, paramnumber: number) => {
+const getFilms = async (searchQuery: string | "", pageNumber: number | 1) => {
     setError(null);
     setLoading(true);
     setData(null);
+    setSearchInput('')
 
     try {
         let res;
         if (searchQuery) {
-        res = await getQueryFilm('films', searchQuery, paramnumber);
+        res = await getAllMovies( searchQuery, pageNumber);
         } else {
-        res = await getAllFilms('films', paramnumber);
+        res = await getAllMovies( searchQuery , pageNumber);
         }
         setData(res);
         setSearchResult(res);
@@ -48,19 +48,19 @@ const getFilm = async (searchQuery: string, paramnumber: number) => {
 			return
 		}
 
-		setQueryParams({ query: searchInput })  
+	setSearchParams({ query: searchInput, page: '1'})  
 
 	}
     useEffect(() => {
-    getFilm(query || '', paramnumber);
-    }, [query, paramnumber, searchInput]);
+    getFilms(query || '', pageNumber || 1);
+    }, [query, pageNumber]);
 
 
     return (
 
         <>
 
-        <h1>All the Films</h1> 
+        <h1>All the films</h1> 
 
         <Form className="mb-4" onSubmit={handleSubmit}>
                     <Form.Group className="mb-3" controlId="searchQuery">
@@ -95,7 +95,7 @@ const getFilm = async (searchQuery: string, paramnumber: number) => {
                 <ListGroup className="mb-6">
                 {data.data.map((data) => (
 
-                    <ListGroup.Item
+                <ListGroup.Item
                     action
                     as={Link}
                     key={data.id}
@@ -110,19 +110,19 @@ const getFilm = async (searchQuery: string, paramnumber: number) => {
                 ))}
 
                 </ListGroup>
-                    <div className="page" >Page {paramnumber}/ {data.last_page}</div>
+                    <div className="page" >Page {pageNumber|| 1 }/ {data.last_page}</div>
 
                     <Pagination
                                     totalPages={data.total}
-                                    hasPreviousPage={data.current_page > 0}
-                                    hasNextPage={data.current_page + 1 < data.last_page}
-                                    onPreviousPage={() => {setSearchParams({page: String(paramnumber - 1)}) }}
-                                    onNextPage={() => {setSearchParams({page: String(paramnumber + 1)}) }}
+                                    hasPreviousPage={pageNumber > 1}
+                                    hasNextPage={pageNumber  < data.last_page}
+                                    onPreviousPage={() => {setSearchParams({query: query || '', page: String(pageNumber - 1)}) }}
+                                    onNextPage={() => {setSearchParams({query: query || '', page: String(pageNumber + 1 ) }) }}
                             /> 
 
                 </div>
-            )}
-            </>
+            )} 
+            </> 
         )}
 
         </>
@@ -131,5 +131,3 @@ const getFilm = async (searchQuery: string, paramnumber: number) => {
 };
 
 export default FilmsPage;
-
-

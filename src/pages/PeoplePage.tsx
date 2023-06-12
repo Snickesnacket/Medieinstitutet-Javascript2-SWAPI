@@ -1,6 +1,6 @@
 import { useState, useEffect,} from "react";
 import ListGroup from "react-bootstrap/ListGroup";
-import { getAll, getQuery } from "../services/SWAPI";
+import { getAllPeople } from "../services/SWAPI";
 import { srchResponsePerson } from "../types";
 import Pagination from "../components/Pagination";
 import { useSearchParams, Link, } from "react-router-dom";
@@ -12,7 +12,6 @@ const [error, setError] = useState<string | null>(null);
 const [loading, setLoading] = useState(true)
 const  [data, setData] = useState<srchResponsePerson|null>(null) //svaret 
 const [searchParams, setSearchParams] = useSearchParams({query: '', page:'1'})
-//const [queryParams, setQueryParams] = useSearchParams('')
 const [searchResult, setSearchResult] = useState<srchResponsePerson|null>(null)
 const page = searchParams.get('page'|| "1")
 const query = searchParams.get('query')
@@ -24,13 +23,14 @@ const getPeople = async (searchQuery: string | "", pageNumber: number | 1) => {
     setError(null);
     setLoading(true);
     setData(null);
+    setSearchInput('')
 
     try {
         let res;
         if (searchQuery) {
-        res = await getQuery('people', searchQuery, pageNumber);
+        res = await getAllPeople( searchQuery, pageNumber);
         } else {
-        res = await getQuery('people', searchQuery , pageNumber);
+        res = await getAllPeople( searchQuery , pageNumber);
         }
         setData(res);
         setSearchResult(res);
