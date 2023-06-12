@@ -21,7 +21,7 @@ export const getAll= async ( endpoint: string, page: number) => {
 
 }
 
-export const getQuery= async ( endpoint: string, searchQuery: string, page: number) => {
+export const getQuery= async ( endpoint: string, searchQuery: string, page = 1) => {
 		return get<srchResponsePerson>(`/${endpoint}/?search=${searchQuery}&page=${page}`);
 
 }

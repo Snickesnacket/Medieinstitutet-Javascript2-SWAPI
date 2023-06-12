@@ -14,13 +14,13 @@ const  [data, setData] = useState<srchResponsePerson|null>(null) //svaret
 const [searchParams, setSearchParams] = useSearchParams({query: '', page:'1'})
 //const [queryParams, setQueryParams] = useSearchParams('')
 const [searchResult, setSearchResult] = useState<srchResponsePerson|null>(null)
-const param = searchParams.get('page'|| "1")
+const page = searchParams.get('page'|| "1")
 const query = searchParams.get('query')
 const [searchInput, setSearchInput] = useState('')
 
-const paramnumber = Number(param)
+const pageNumber = Number(page)
 
-const getPeople = async (searchQuery: string | "", paramnumber: number) => {
+const getPeople = async (searchQuery: string | "", pageNumber: number | 1) => {
     setError(null);
     setLoading(true);
     setData(null);
@@ -28,9 +28,9 @@ const getPeople = async (searchQuery: string | "", paramnumber: number) => {
     try {
         let res;
         if (searchQuery) {
-        res = await getQuery('people', searchQuery, paramnumber);
+        res = await getQuery('people', searchQuery, pageNumber);
         } else {
-        res = await getQuery('people', searchQuery , paramnumber);
+        res = await getQuery('people', searchQuery , pageNumber);
         }
         setData(res);
         setSearchResult(res);
@@ -48,12 +48,12 @@ const getPeople = async (searchQuery: string | "", paramnumber: number) => {
 			return
 		}
 
-		setSearchParams({ query: searchInput })  
+	setSearchParams({ query: searchInput, page: '1'})  
 
 	}
     useEffect(() => {
-    getPeople(query || '', paramnumber);
-    }, [query, paramnumber, searchInput]);
+    getPeople(query || '', pageNumber || 1);
+    }, [query, pageNumber]);
 
 
     return (
@@ -110,19 +110,19 @@ const getPeople = async (searchQuery: string | "", paramnumber: number) => {
                 ))}
 
                 </ListGroup>
-                    <div className="page" >Page {searchParams}/ {data.last_page}</div>
+                    <div className="page" >Page {pageNumber|| 1 }/ {data.last_page}</div>
 
                     <Pagination
                                     totalPages={data.total}
-                                    hasPreviousPage={data.current_page > paramnumber}
-                                    hasNextPage={data.current_page + 1 < data.last_page}
-                                    onPreviousPage={() => {setSearchParams({query: searchInput, page: String(paramnumber - 1)}) }}
-                                    onNextPage={() => {setSearchParams({query: searchInput,page: String(paramnumber + 1) }) }}
+                                    hasPreviousPage={pageNumber > 1}
+                                    hasNextPage={pageNumber  < data.last_page}
+                                    onPreviousPage={() => {setSearchParams({query: query || '', page: String(pageNumber - 1)}) }}
+                                    onNextPage={() => {setSearchParams({query: query || '', page: String(pageNumber + 1 ) }) }}
                             /> 
 
                 </div>
-            )}
-            </>
+            )} 
+            </> 
         )}
 
         </>
