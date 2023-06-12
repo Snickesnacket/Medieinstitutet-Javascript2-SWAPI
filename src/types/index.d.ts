@@ -10,17 +10,36 @@ export type Person = {
     mass: string,
     skin_color: string,
     created: string,
-    films: film[], 
-    species?: species[],
-    starships: starship[],
-    vehicles: vehicle[],
+    films: filmLink[], 
+    species?: speciesLink[],
+    starships: starshipLink[],
+    vehicles: vehicleLink[],
     homeworld: {
         id: number,
         name: string
     }
 }
 
-export type srchResponse = {
+export type Film = {
+    id: number,
+    title: string,
+    episode_id: string, 
+    opening_crawl: string,
+    director: string,
+    height: string,
+    producer: string,
+    release_date: string,
+    created: string,
+    edited: filmLink[], 
+    carachters: charactersLink[],
+    planets: planetsLink[]
+    starships: starshipLink [],
+    vehicles: vehicleLink [],
+    species: speciesLink []
+}
+
+
+export type srchResponsePerson = {
     current_page: number, 
     data: Person []
     first_page_url: string,
@@ -35,6 +54,22 @@ export type srchResponse = {
     to: number, 
     total: number,
 }
+export type srchResponseFilm = {
+     current_page: number, 
+    data: Film []
+    first_page_url: string,
+    from: number, 
+    last_page: number, 
+    last_page_url: string
+    links: link []
+    next_page_url: string, 
+    path: string,
+    per_page: number, 
+    prev_page_ur:null, 
+    to: number, 
+    total: number,
+}
+
 
 export type link = {
     url: null| string,
@@ -42,21 +77,28 @@ export type link = {
     active: boolean,
 }
 
-export type film = {
+export type filmLink = {
     id: number, 
     title: string
 }
 
-export type species = {
+export type speciesLink = {
     id: number, 
     title: string
 }
 
-export type starships = {
+export type starshipsLInk = {
     id: number, 
     name: string
 }
-export type vehicles = {
+export type vehiclesLink = {
     id: number, 
     title: string
 }
+
+export type charachtersLink = {
+    id: number, 
+    name: string
+}
+
+

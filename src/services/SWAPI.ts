@@ -1,4 +1,4 @@
-import {Person, srchResponse} from '../types/index'
+import {Film, Person, srchResponseFilm, srchResponsePerson} from '../types/index'
 import axios from 'axios'
 
 const instance = axios.create({
@@ -15,23 +15,32 @@ const get = async <T>(endpoint: string) => {
 }
 
 const BASE_URL = 'https://swapi.thehiveresistance.com/api'
-/**
- * Execute a HTTP GET request to an endpoint.
- *
- * @param {string} endpoint Endpoint to HTTP GET
- * @returns Promise
- */
+
 export const getAll= async ( endpoint: string, page: number) => {
-		return get<srchResponse>(`/${endpoint}/?page=${page}`);
+		return get<srchResponsePerson>(`/${endpoint}/?page=${page}`);
 
 }
 
 export const getQuery= async ( endpoint: string, searchQuery: string, page: number) => {
-		return get<srchResponse>(`/${endpoint}/?search=${searchQuery}&page=${page}`);
+		return get<srchResponsePerson>(`/${endpoint}/?search=${searchQuery}&page=${page}`);
 
 }
 
-export const getId= async ( endpoint: string, id: number) => {
+export const getAllFilms= async ( endpoint: string, page: number) => {
+		return get<srchResponseFilm>(`/${endpoint}/?page=${page}`);
+
+}
+
+export const getQueryFilm= async ( endpoint: string, searchQuery: string, page: number) => {
+		return get<srchResponseFilm>(`/${endpoint}/?search=${searchQuery}&page=${page}`);
+
+}
+export const getFilmId= async ( endpoint: string, id: number) => {
+		return get<Film>(`/${endpoint}/${id}`)
+
+}
+
+export const getPersonId= async ( endpoint: string, id: number) => {
 		return get<Person>(`/${endpoint}/${id}`)
 
 }
@@ -41,11 +50,3 @@ export const getAllPlanets= async <T>() => {
 	return response.data as T
 }
 
-/**
- * Search 
- * @returns Promise
- */
-
-/* export const search = async (query: string, page = 0) => {
-	return get<srchRespone>(`/search?query=${query}&tags=story&page=${page}`)
-} */

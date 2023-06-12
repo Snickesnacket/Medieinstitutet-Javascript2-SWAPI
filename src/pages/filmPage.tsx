@@ -1,26 +1,26 @@
 import { useEffect, useState } from 'react'
 import {  useParams,} from 'react-router-dom'
-import { Person} from '../types'
-import {  getPersonId } from '../services/SWAPI'
+import { Film} from '../types'
+import {  getFilmId } from '../services/SWAPI'
 import ListGroup from 'react-bootstrap/esm/ListGroup'
 import ListGroupItem from 'react-bootstrap/esm/ListGroupItem'
 
 const PersonPage = () => {
     const [error, setError] = useState<string|null>(null)
 	const [loading, setLoading] = useState(true)
-    const [person, setPerson] = useState<Person>()
+    const [film, setFilm] = useState<Film>()
     const { id } = useParams()
-	const personId = Number(id)
+	const filmId = Number(id)
 
-    const getPerson = async ( personId: number) => {
+    const getFilm= async ( personId: number) => {
         setError(null)
         setLoading(true)
         console.log('hello there!')
 
         try {
-        const data = await getPersonId('people', personId)
+        const data = await getFilmId('people', personId)
         console.log("the data",data)
-        setPerson(data)
+        setFilm(data)
         
 
         } catch(err: any) { 
@@ -33,34 +33,36 @@ const PersonPage = () => {
     console.log("the outside")
 
     useEffect(() => {
-    getPerson( personId)
-}, [personId]);
+    getFilm( filmId)
+}, [filmId]);
 
     return (
     
         <>
         {loading && <p>🤔 Loading...</p>}
-            {person && (
+            {film && (
                 <div className="mb-3">
                         <div>
-                        <h2>{person.name}</h2>
-                        <p>Eyecolor : {person.eye_color}</p>
-                        <p>Haircolor: {person.hair_coor}</p>
-                        <p>Born: {person.birth_year}</p>
-                        <p>Height: {person.height}</p>
-                        <p>Mass: {person.mass}</p>
-                        <p>Skincolor: {person.skin_color}</p>
-                        <p>Created: {person.created}</p>
-                        <p>Homeword: {person.homeworld.name}</p>
-                        <div> 
-                                <ListGroup className='mb-3'>
-                            
-                                    {person.films.map(film => (
+                        <h2>{film.title}</h2>
+                        <p>Episode id : {film.id}</p>
+                        <p>opening crawler {film.opening_crawl}</p>
+                        <p>Director: {film.director}</p>
+                        <p>Producer: {film.producer}</p>
+                        <p>Release date: {film.release_date}</p>
+                        <p>Created {film.created}</p>
+                        <p>Edited: {film.edited}</p>
+                        <div>
+                        <ListGroup className='mb-3'>
+                        <p>Charachters: {film.carachters.map(charachter => 
                                         <ListGroupItem
                                             action
                                             key={film.id}
                                     ><p>{film.title}</p>
                                     </ListGroupItem>
+                            )}</p></div>
+                        <div> 
+                                
+                            
                                     ))}
                                 </ListGroup>
                             </div>

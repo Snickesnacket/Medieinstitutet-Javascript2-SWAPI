@@ -3,14 +3,14 @@ import Alert from 'react-bootstrap/Alert'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import ListGroup from 'react-bootstrap/ListGroup'
-import { srchResponse } from '../types'
+import { srchResponsePerson } from '../types'
 import { useSearchParams } from 'react-router-dom'
 
 const SearchPage = () => {
 	const [error, setError] = useState<string | null>(null)
 	const [loading, setLoading] = useState(false)
 	const [searchInput, setSearchInput] = useState("")
-	const [searchResult, setSearchResult] = useState<srchResponse | null>(null)
+	const [searchResult, setSearchResult] = useState<srchResponsePerson | null>(null)
 	const [searchParams, setSearchParams] = useSearchParams()
 
 

@@ -26,7 +26,6 @@ const Pagination: React.FC<IPaginationProps> = ({
 				>Previous Page</Button>
 			</div>
 
-			
 
 			<div className="next">
 				<Button
