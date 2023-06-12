@@ -22,7 +22,12 @@ const BASE_URL = 'https://swapi.thehiveresistance.com/api'
  * @returns Promise
  */
 export const getAll= async ( endpoint: string, page: number) => {
-		return get<srchResponse>(`/${endpoint}?page=${page}`)
+		return get<srchResponse>(`/${endpoint}/?page=${page}`);
+
+}
+
+export const getQuery= async ( endpoint: string, searchQuery: string, page: number) => {
+		return get<srchResponse>(`/${endpoint}/?search=${searchQuery}&page=${page}`);
 
 }
 

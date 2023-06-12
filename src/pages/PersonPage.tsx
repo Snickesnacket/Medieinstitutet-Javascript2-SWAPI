@@ -11,7 +11,6 @@ const PersonPage = () => {
     const [person, setPerson] = useState<Person>()
     const { id } = useParams()
 	const personId = Number(id)
-  
 
     const getPerson = async ( personId: number) => {
         setError(null)
@@ -22,6 +21,7 @@ const PersonPage = () => {
         const data = await getId('people', personId)
         console.log("the data",data)
         setPerson(data)
+        
 
         } catch(err: any) { 
         setError(err.message)
@@ -37,7 +37,9 @@ const PersonPage = () => {
 }, [personId]);
 
     return (
+    
         <>
+        {loading && <p>🤔 Loading...</p>}
             {person && (
                 <div className="mb-3">
                         <div>
