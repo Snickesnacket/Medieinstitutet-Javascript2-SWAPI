@@ -1,5 +1,5 @@
 import Search from '../components/Search'
-import {Film, Person, Planet, Species, Starship, Vehicle, filmLink, srchResponseFilm, srchResponsePerson, srchResponsePlanets, srchResponseSpecies, srchResponseStarships, srchResponseVehicles, theLink} from '../types/index'
+import {Film, Person, Planet, Species, Starship, Vehicles, filmLink, srchResponseFilm, srchResponsePerson, srchResponsePlanets, srchResponseSpecies, srchResponseStarships, srchResponseVehicles, theLink} from '../types/index'
 import axios from 'axios'
 
 const instance = axios.create({
@@ -55,7 +55,7 @@ export const getPlanetId= async ( endpoint: string, id: number) => {
 
 }
 export const getVehicleId= async ( endpoint: string, id: number) => {
-		return get<Vehicle>(`/${endpoint}/${id}`)
+		return get<Vehicles>(`/${endpoint}/${id}`)
 
 }
 export const getSpecieId= async ( endpoint: string, id: number) => {

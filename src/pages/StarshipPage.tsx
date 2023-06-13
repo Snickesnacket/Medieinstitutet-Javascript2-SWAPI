@@ -64,7 +64,7 @@ const StarshipPage = () => {
                         <p>Edited: {data.edited}</p>
                         {pilot && ( 
                                 <div> 
-                                    <h3>These are the characters</h3>
+                                    <h3>These are the Pilots</h3>
                                 <ListGroup className='mb-3'>
                                     {pilot.map((item => (
                                         <ListGroupItem

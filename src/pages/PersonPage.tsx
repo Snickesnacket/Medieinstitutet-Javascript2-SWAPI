@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import {  Link, useParams, useNavigate} from 'react-router-dom'
-import { Person, theLink} from '../types'
+import { Person, filmLink, theLink} from '../types'
 import {  getPersonId } from '../services/SWAPI'
 import ListGroup from 'react-bootstrap/esm/ListGroup'
 import ListGroupItem from 'react-bootstrap/esm/ListGroupItem'
@@ -9,15 +9,16 @@ import ListGroupItem from 'react-bootstrap/esm/ListGroupItem'
 const PersonPage = () => {
     const [error, setError] = useState<string|null>(null)
 	const [loading, setLoading] = useState(true)
-    const [person, setPerson] = useState<Person>()
+    const [data, setData] = useState<Person>()
     const { id } = useParams()
 	const personId = Number(id)
     const [starships, setStarships] = useState<theLink[]>();
     const [vehicles, setVehicles] = useState<theLink[]>();
     const [species, setSpecies] = useState<theLink[]>()
+    const [film, setFilm] = useState<filmLink[]>()
  
 
-    const getPerson = async ( personId: number) => {
+    const getPerson = async (personId: number) => {
         setError(null)
         setLoading(true)
         console.log('hello there!')
@@ -25,10 +26,11 @@ const PersonPage = () => {
         try {
         const data = await getPersonId('people', personId)
         console.log("the data",data)
-        setPerson(data)
+        setData(data)
         setStarships(data.starships)
         setVehicles(data.vehicles)
         setSpecies(data.species)
+        setFilm(data.films)
         
 
         } catch(err: any) { 
@@ -48,34 +50,36 @@ const PersonPage = () => {
     
         <>
         {loading && <p>🤔 Loading...</p>}
-            {person && (
+            {data && (
                 <div className="mb-3">
                         <div>
-                        <h2>{person.name}</h2>
-                        <p>Eyecolor : {person.eye_color}</p>
-                        <p>Haircolor: {person.hair_coor}</p>
-                        <p>Born: {person.birth_year}</p>
-                        <p>Height: {person.height}</p>
-                        <p>Mass: {person.mass}</p>
-                        <p>Skincolor: {person.skin_color}</p>
-                        <p>Created: {person.created}</p>
-                        <p>Homeword: {person.homeworld.name}</p>
-                        <div>   
-                            <h3>These are the films</h3>
-                            <ListGroup className='mb-3'>
-                                {person.films.map(film => (
-                                <ListGroupItem
-                                    action
-                                    key={film.id}
-                                    variant='success'
-                                >
-                                    <Link to={`/Films/${film.id}`}>
-                                    <p>{film.title}</p>
-                                    </Link>
-                                </ListGroupItem>
-                                ))}
-                            </ListGroup>
-                            </div>
+                        <h2>{data.name}</h2>
+                        <p>Eyecolor : {data.eye_color}</p>
+                        <p>Haircolor: {data.hair_coor}</p>
+                        <p>Born: {data.birth_year}</p>
+                        <p>Height: {data.height}</p>
+                        <p>Mass: {data.mass}</p>
+                        <p>Skincolor: {data.skin_color}</p>
+                        <p>Created: {data.created}</p>
+                        <p>Homeword: {data.homeworld.name}</p>
+                        {film && ( 
+                                <div> 
+                                    <h3>These are the films</h3>
+                                <ListGroup className='mb-3'>
+                                    {film.map((item => (
+                                        <ListGroupItem
+                                            action
+                                            key={item.id}
+                                            variant='success'
+                                        >
+                                            <Link to={`/Films/${item.id}`}>
+                                            <p>{item.title}</p>
+                                            </Link>
+                                    </ListGroupItem>
+                                    )))}
+                                </ListGroup>
+                            </div> 
+                        )}
                             {species&& ( 
                                 <div> 
                                     <h3>These are the species</h3>

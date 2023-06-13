@@ -12,17 +12,17 @@ const PlanetPage = () => {
     const [planet, setPlanet] = useState<Planet>()
     const { id } = useParams()
 	const planetId = Number(id)
-    const [person, setPerson] = useState<theLink[]>();
+    const [person, setPerson] = useState<Person[]>();
     const [films, setFilms] = useState<filmLink[]>();
 
 
-    const getPlanet = async ( personId: number) => {
+    const getPlanet = async ( planetId: number) => {
         setError(null)
         setLoading(true)
         console.log('hello there!')
 
         try {
-        const data = await getPlanetId('people', personId)
+        const data = await getPlanetId('planets', planetId)
         console.log("the data",data)
         setPlanet(data)
         setPerson(data.residents)
@@ -63,7 +63,7 @@ const PlanetPage = () => {
                         <p>Edited: {planet.edited}</p>
                         {person && ( 
                                 <div> 
-                                    <h3>These are the pilots</h3>
+                                    <h3>These are the Residents</h3>
                                 <ListGroup className='mb-3'>
                                     {person.map((item => (
                                         <ListGroupItem
@@ -71,7 +71,7 @@ const PlanetPage = () => {
                                             key={item.id}
                                             variant='success'
                                         >
-                                            <Link to={`/People/${item.id}`}>
+                                            <Link to={`/people/${item.id}`}>
                                             <p>{item.name}</p>
                                             </Link>
                                     </ListGroupItem>
@@ -81,7 +81,7 @@ const PlanetPage = () => {
                         )}
                         {films && ( 
                                 <div> 
-                                    <h3>These are the pilots</h3>
+                                    <h3>These are the Films</h3>
                                 <ListGroup className='mb-3'>
                                     {films.map((item => (
                                         <ListGroupItem
