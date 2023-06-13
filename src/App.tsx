@@ -14,9 +14,9 @@ import FilmsPage from './pages/FilmsPage'
 import PersonPage from './pages/PersonPage'
 import VehiclePage from './pages/VehiclePage'
 import SpeciePage from './pages/SpeciePage'
-import FilmPage from './pages/filmPage'
 import StarshipPage from './pages/StarshipPage'
 import PlanetPage from './pages/PlanetPage'
+import FilmPage from './pages/FilmPage'
 
 const App = () => {
 	return (
