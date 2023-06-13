@@ -59,7 +59,7 @@ export type Film = {
     species: theLink []
 }
 
-export type Vehicle = {
+export type Vehicles = {
     id: number,
     name: string,
     model: string, 
@@ -198,7 +198,7 @@ export type srchResponseFilm = {
 
 export type srchResponseVehicles = {
     current_page: number, 
-    data: Vehicles[]
+    data: Vehicles []
     first_page_url: string,
     from: number, 
     last_page: number, 

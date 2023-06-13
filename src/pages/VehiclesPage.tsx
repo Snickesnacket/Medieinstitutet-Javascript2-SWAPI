@@ -100,7 +100,7 @@ const getVehicles = async (searchQuery: string | "", pageNumber: number | 1) => 
                     as={Link}
                     key={data.id}
                     variant="success"
-                    to={`/Vehicles/${data.id}`}
+                    to={`/vehicles/${data.id}`}
                     >
                     <h2 className="h3">{data.name}</h2>
                     <p className="text-muted small mb-0">model: {data.model}</p>

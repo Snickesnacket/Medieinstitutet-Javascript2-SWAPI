@@ -15,7 +15,6 @@ const PlanetPage = () => {
     const [starships, setStarships] = useState<theLink[]>();
     const [vehicles, setVehicles] = useState<theLink[]>();
     const [species, setSpecies] = useState<theLink[]>()
-    const navigate = useNavigate();
 
     const getPerson = async ( personId: number) => {
         setError(null)

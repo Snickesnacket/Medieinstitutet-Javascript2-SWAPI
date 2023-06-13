@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import {  Link, useParams, useNavigate} from 'react-router-dom'
-import { Person, filmLink, planetsLink, speciesLink, starshipsLink, vehiclesLink} from '../types'
+import { Person, theLink} from '../types'
 import {  getPersonId } from '../services/SWAPI'
 import ListGroup from 'react-bootstrap/esm/ListGroup'
 import ListGroupItem from 'react-bootstrap/esm/ListGroupItem'
@@ -12,10 +12,10 @@ const PersonPage = () => {
     const [person, setPerson] = useState<Person>()
     const { id } = useParams()
 	const personId = Number(id)
-    const [starships, setStarships] = useState<starshipsLink[]>();
-    const [vehicles, setVehicles] = useState<vehiclesLink[]>();
-    const [species, setSpecies] = useState<speciesLink[]>()
-    const navigate = useNavigate();
+    const [starships, setStarships] = useState<theLink[]>();
+    const [vehicles, setVehicles] = useState<theLink[]>();
+    const [species, setSpecies] = useState<theLink[]>()
+ 
 
     const getPerson = async ( personId: number) => {
         setError(null)

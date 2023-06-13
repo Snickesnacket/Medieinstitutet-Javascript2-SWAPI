@@ -1,21 +1,21 @@
 import { useEffect, useState } from 'react'
 import {  Link, useParams,} from 'react-router-dom'
-import { Film, Vehicle, charactersLink, filmLink, planetsLink, speciesLink, starshipsLink, vehiclesLink} from '../types'
-import {  getFilmId, getVehicleId } from '../services/SWAPI'
+import { Vehicles, filmLink, theLink} from '../types'
+import {  getVehicleId } from '../services/SWAPI'
 import ListGroup from 'react-bootstrap/esm/ListGroup'
 import ListGroupItem from 'react-bootstrap/esm/ListGroupItem'
-import { NavItem } from 'react-bootstrap'
+
 
 const VehiclePage = () => {
     const [error, setError] = useState<string|null>(null)
 	const [loading, setLoading] = useState(true)
-    const [data, setData] = useState<Vehicle>()
+    const [data, setData] = useState<Vehicles>()
     const { id } = useParams()
 	const VehicleId = Number(id)
     const [film, setFilm] = useState<filmLink[]>()
-    const [pilot, setPilot] = useState<speciesLink[]>()
+    const [pilot, setPilot] = useState<theLink[]>()
 
-    const getFilm= async ( VehicleId: number) => {
+    const getVehicle= async ( VehicleId: number) => {
         setError(null)
         setLoading(true)
         console.log('hello there!')
@@ -39,7 +39,7 @@ const VehiclePage = () => {
     console.log("the outside")
 
     useEffect(() => {
-    getFilm( VehicleId)
+    getVehicle( VehicleId)
 }, [VehicleId]);
 
     return (
@@ -64,7 +64,7 @@ const VehiclePage = () => {
                         <p>Edited: {data.edited}</p>
                         {pilot && ( 
                                 <div> 
-                                    <h3>These are the characters</h3>
+                                    <h3>These are the pilots</h3>
                                 <ListGroup className='mb-3'>
                                     {pilot.map((item => (
                                         <ListGroupItem
