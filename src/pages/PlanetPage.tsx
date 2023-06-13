@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import {  Link, useParams, useNavigate} from 'react-router-dom'
-import { Person, filmLink, theLink} from '../types'
-import {  getPersonId } from '../services/SWAPI'
+import { Person, Planet, filmLink, theLink} from '../types'
+import {  getPlanetId } from '../services/SWAPI'
 import ListGroup from 'react-bootstrap/esm/ListGroup'
 import ListGroupItem from 'react-bootstrap/esm/ListGroupItem'
 
@@ -9,25 +9,25 @@ import ListGroupItem from 'react-bootstrap/esm/ListGroupItem'
 const PlanetPage = () => {
     const [error, setError] = useState<string|null>(null)
 	const [loading, setLoading] = useState(true)
-    const [person, setPerson] = useState<Person>()
+    const [planet, setPlanet] = useState<Planet>()
     const { id } = useParams()
-	const personId = Number(id)
-    const [starships, setStarships] = useState<theLink[]>();
-    const [vehicles, setVehicles] = useState<theLink[]>();
-    const [species, setSpecies] = useState<theLink[]>()
+	const planetId = Number(id)
+    const [person, setPerson] = useState<theLink[]>();
+    const [films, setFilms] = useState<filmLink[]>();
 
-    const getPerson = async ( personId: number) => {
+
+    const getPlanet = async ( personId: number) => {
         setError(null)
         setLoading(true)
         console.log('hello there!')
 
         try {
-        const data = await getPersonId('people', personId)
+        const data = await getPlanetId('people', personId)
         console.log("the data",data)
-        setPerson(data)
-        setStarships(data.starships)
-        setVehicles(data.vehicles)
-        setSpecies(data.species)
+        setPlanet(data)
+        setPerson(data.residents)
+        setFilms(data.films)
+        
         
 
         } catch(err: any) { 
@@ -40,52 +40,38 @@ const PlanetPage = () => {
     console.log("the outside")
 
     useEffect(() => {
-    getPerson( personId)
-}, [personId]);
+    getPlanet( planetId)
+}, [planetId]);
 
     return (
     
         <>
         {loading && <p>🤔 Loading...</p>}
-            {person && (
+            {planet && (
                 <div className="mb-3">
                         <div>
-                        <h2>{person.name}</h2>
-                        <p>Eyecolor : {person.eye_color}</p>
-                        <p>Haircolor: {person.hair_coor}</p>
-                        <p>Born: {person.birth_year}</p>
-                        <p>Height: {person.height}</p>
-                        <p>Mass: {person.mass}</p>
-                        <p>Skincolor: {person.skin_color}</p>
-                        <p>Created: {person.created}</p>
-                        <p>Homeword: {person.homeworld.name}</p>
-                        <div>   
-                            <h3>These are the films</h3>
-                            <ListGroup className='mb-3'>
-                                {person.films.map(film => (
-                                <ListGroupItem
-                                    action
-                                    key={film.id}
-                                    variant='success'
-                                >
-                                    <Link to={`/Films/${film.id}`}>
-                                    <p>{film.title}</p>
-                                    </Link>
-                                </ListGroupItem>
-                                ))}
-                            </ListGroup>
-                            </div>
-                            {species&& ( 
+                        <h2> {planet.name}</h2>
+                        <p>Rotation_period: {planet.rotation_period}</p>
+                        <p>orbital_period: {planet.orbital_period}</p>
+                        <p>diameter: {planet.diameter}</p>
+                        <p>climate: {planet.climate}</p>
+                        <p>gravity: {planet.gravity}</p>
+                        <p>terrain: {planet.terrain}</p>
+                        <p>surface water: {planet.surface_water}</p>
+                        <p>population: {planet.population}</p>
+                        <p>Created: {planet.created}</p>
+                        <p>Edited: {planet.edited}</p>
+                        {person && ( 
                                 <div> 
-                                    <h3>These are the species</h3>
+                                    <h3>These are the pilots</h3>
                                 <ListGroup className='mb-3'>
-                                    {species.map((item => (
+                                    {person.map((item => (
                                         <ListGroupItem
                                             action
                                             key={item.id}
                                             variant='success'
                                         >
-                                            <Link to={`/Species/${item.id}`}>
+                                            <Link to={`/People/${item.id}`}>
                                             <p>{item.name}</p>
                                             </Link>
                                     </ListGroupItem>
@@ -93,42 +79,25 @@ const PlanetPage = () => {
                                 </ListGroup>
                             </div> 
                         )}
-                        {starships&& ( 
+                        {films && ( 
                                 <div> 
-                                    <h3>These are the starships</h3>
+                                    <h3>These are the pilots</h3>
                                 <ListGroup className='mb-3'>
-                                    {starships.map((item => (
+                                    {films.map((item => (
                                         <ListGroupItem
                                             action
                                             key={item.id}
                                             variant='success'
                                         >
-                                            <Link to={`/Starships/${item.id}`}>
-                                            <p>{item.name}</p>
+                                            <Link to={`/films/${item.id}`}>
+                                            <p>{item.title}</p>
                                             </Link>
                                     </ListGroupItem>
                                     )))}
                                 </ListGroup>
                             </div> 
                         )}
-                        {vehicles && ( 
-                                <div> 
-                                    <h3>These are the vehicles</h3>
-                                <ListGroup className='mb-3'>
-                                    {vehicles.map((item => (
-                                        <ListGroupItem
-                                            action
-                                            key={item.id}
-                                            variant='success'
-                                        >
-                                            <Link to={`/Vehicles/${item.id}`}>
-                                            <p>{item.name}</p>
-                                            </Link>
-                                    </ListGroupItem>
-                                    )))}
-                                </ListGroup>
-                            </div> 
-                        )}
+
                         </div>
                 </div>
             )}
