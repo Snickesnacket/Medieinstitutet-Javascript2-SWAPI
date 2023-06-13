@@ -30,8 +30,8 @@ export type Film = {
     producer: string,
     release_date: string,
     created: string,
-    edited: filmLink[], 
-    carachters: charactersLink[],
+    edited: string, 
+    characters: charactersLink[],
     planets: planetsLink[]
     starships: starshipLink [],
     vehicles: vehicleLink [],
@@ -96,9 +96,8 @@ export type vehiclesLink = {
     title: string
 }
 
-export type charachtersLink = {
-    id: number, 
-    name: string
-}
-
+export type charactersLink = {
+  id: number;
+  name: string;
+};
 

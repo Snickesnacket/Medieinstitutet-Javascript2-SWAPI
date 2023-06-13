@@ -1,5 +1,5 @@
 import Search from '../components/Search'
-import {Film, Person, srchResponseFilm, srchResponsePerson} from '../types/index'
+import {Film, Person, charactersLink, filmLink, srchResponseFilm, srchResponsePerson} from '../types/index'
 import axios from 'axios'
 
 const instance = axios.create({
@@ -41,6 +41,10 @@ export const getFilmId= async ( endpoint: string, id: number) => {
 
 }
 
+export const getCharachters= async ( endpoint: string, id: number) => {
+		return get<charactersLink>(`/${endpoint}/${id}`)
+
+}
 export const getPersonId= async ( endpoint: string, id: number) => {
 		return get<Person>(`/${endpoint}/${id}`)
 
