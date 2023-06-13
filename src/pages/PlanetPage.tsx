@@ -1,33 +1,31 @@
 import { useEffect, useState } from 'react'
-import {  Link, useParams,} from 'react-router-dom'
-import { Film,  theLink } from '../types'
-import {  getFilmId } from '../services/SWAPI'
+import {  Link, useParams, useNavigate} from 'react-router-dom'
+import { Person, filmLink, theLink} from '../types'
+import {  getPersonId } from '../services/SWAPI'
 import ListGroup from 'react-bootstrap/esm/ListGroup'
 import ListGroupItem from 'react-bootstrap/esm/ListGroupItem'
 
-const FilmPage = () => {
+
+const PlanetPage = () => {
     const [error, setError] = useState<string|null>(null)
 	const [loading, setLoading] = useState(true)
-    const [film, setFilm] = useState<Film>()
+    const [person, setPerson] = useState<Person>()
     const { id } = useParams()
-	const filmId = Number(id)
-    const [characters, setCharacters] = useState<theLink[]>();
-    const [planets, setPlanets] = useState<theLink[]>();
+	const personId = Number(id)
     const [starships, setStarships] = useState<theLink[]>();
     const [vehicles, setVehicles] = useState<theLink[]>();
     const [species, setSpecies] = useState<theLink[]>()
+    const navigate = useNavigate();
 
-    const getFilm= async ( filmId: number) => {
+    const getPerson = async ( personId: number) => {
         setError(null)
         setLoading(true)
         console.log('hello there!')
 
         try {
-        const data = await getFilmId('films', filmId)
+        const data = await getPersonId('people', personId)
         console.log("the data",data)
-        setFilm(data)
-        setCharacters(data.characters);
-        setPlanets(data.planets)
+        setPerson(data)
         setStarships(data.starships)
         setVehicles(data.vehicles)
         setSpecies(data.species)
@@ -43,53 +41,52 @@ const FilmPage = () => {
     console.log("the outside")
 
     useEffect(() => {
-    getFilm( filmId)
-}, [filmId]);
+    getPerson( personId)
+}, [personId]);
 
     return (
     
         <>
         {loading && <p>🤔 Loading...</p>}
-            {film &&  (
+            {person && (
                 <div className="mb-3">
                         <div>
-                        <h2>{film.title}</h2>
-                        <p>Episode id : {film.id}</p>
-                        <p>opening crawler {film.opening_crawl}</p>
-                        <p>Director: {film.director}</p>
-                        <p>Producer: {film.producer}</p>
-                        <p>Release date: {film.release_date}</p>
-                        <p>Created {film.created}</p>
-                        <p>Edited {film.edited}</p>
-                        {characters && ( 
+                        <h2>{person.name}</h2>
+                        <p>Eyecolor : {person.eye_color}</p>
+                        <p>Haircolor: {person.hair_coor}</p>
+                        <p>Born: {person.birth_year}</p>
+                        <p>Height: {person.height}</p>
+                        <p>Mass: {person.mass}</p>
+                        <p>Skincolor: {person.skin_color}</p>
+                        <p>Created: {person.created}</p>
+                        <p>Homeword: {person.homeworld.name}</p>
+                        <div>   
+                            <h3>These are the films</h3>
+                            <ListGroup className='mb-3'>
+                                {person.films.map(film => (
+                                <ListGroupItem
+                                    action
+                                    key={film.id}
+                                    variant='success'
+                                >
+                                    <Link to={`/Films/${film.id}`}>
+                                    <p>{film.title}</p>
+                                    </Link>
+                                </ListGroupItem>
+                                ))}
+                            </ListGroup>
+                            </div>
+                            {species&& ( 
                                 <div> 
-                                    <h3>These are the characters</h3>
+                                    <h3>These are the species</h3>
                                 <ListGroup className='mb-3'>
-                                    {characters.map((item => (
+                                    {species.map((item => (
                                         <ListGroupItem
                                             action
                                             key={item.id}
                                             variant='success'
                                         >
-                                            <Link to={`/People/${item.id}`}>
-                                            <p>{item.name}</p>
-                                            </Link>
-                                    </ListGroupItem>
-                                    )))}
-                                </ListGroup>
-                            </div> 
-                        )}
-                        {planets && ( 
-                                <div> 
-                                    <h3>These are the planets</h3>
-                                <ListGroup className='mb-3'>
-                                    {planets.map((item => (
-                                        <ListGroupItem
-                                            action
-                                            key={item.id}
-                                            variant='success'
-                                        >
-                                            <Link to={`/Planets/${item.id}`}>
+                                            <Link to={`/Species/${item.id}`}>
                                             <p>{item.name}</p>
                                             </Link>
                                     </ListGroupItem>
@@ -115,7 +112,7 @@ const FilmPage = () => {
                                 </ListGroup>
                             </div> 
                         )}
-                        {vehicles&& ( 
+                        {vehicles && ( 
                                 <div> 
                                     <h3>These are the vehicles</h3>
                                 <ListGroup className='mb-3'>
@@ -133,25 +130,6 @@ const FilmPage = () => {
                                 </ListGroup>
                             </div> 
                         )}
-                        {species&& ( 
-                                <div> 
-                                    <h3>These are the species</h3>
-                                <ListGroup className='mb-3'>
-                                    {species.map((item => (
-                                        <ListGroupItem
-                                            action
-                                            key={item.id}
-                                            variant='success'
-                                        >
-                                            <Link to={`/Species/${item.id}`}>
-                                            <p>{item.name}</p>
-                                            </Link>
-                                    </ListGroupItem>
-                                    )))}
-                                </ListGroup>
-                            </div> 
-                        )}
-
                         </div>
                 </div>
             )}
@@ -160,5 +138,5 @@ const FilmPage = () => {
 
 }
 
- export default FilmPage
+ export default PlanetPage
 

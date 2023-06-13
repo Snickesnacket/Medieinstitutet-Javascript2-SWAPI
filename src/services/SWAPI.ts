@@ -1,5 +1,5 @@
 import Search from '../components/Search'
-import {Film, Person, Vehicle, charactersLink, filmLink, srchResponseFilm, srchResponsePerson, srchResponseVehicles} from '../types/index'
+import {Film, Person, Planet, Species, Starship, Vehicle, filmLink, srchResponseFilm, srchResponsePerson, srchResponsePlanets, srchResponseSpecies, srchResponseStarships, srchResponseVehicles, theLink} from '../types/index'
 import axios from 'axios'
 
 const instance = axios.create({
@@ -41,8 +41,8 @@ export const getFilmId= async ( endpoint: string, id: number) => {
 
 }
 
-export const getCharachters= async ( endpoint: string, id: number) => {
-		return get<charactersLink>(`/${endpoint}/${id}`)
+export const getItem= async ( endpoint: string, id: number) => {
+		return get<theLink>(`/${endpoint}/${id}`)
 
 }
 export const getPersonId= async ( endpoint: string, id: number) => {
@@ -50,11 +50,23 @@ export const getPersonId= async ( endpoint: string, id: number) => {
 
 }
 
+export const getPlanetId= async ( endpoint: string, id: number) => {
+		return get<Planet>(`/${endpoint}/${id}`)
+
+}
 export const getVehicleId= async ( endpoint: string, id: number) => {
 		return get<Vehicle>(`/${endpoint}/${id}`)
 
 }
+export const getSpecieId= async ( endpoint: string, id: number) => {
+		return get<Species>(`/${endpoint}/${id}`)
 
+}
+
+export const getStarshipId= async ( endpoint: string, id: number) => {
+		return get<Starship>(`/${endpoint}/${id}`)
+
+}
 
 export const getAllt= async <T>(endpoint: string) => {
 		return get(endpoint) as T
@@ -72,8 +84,26 @@ export const getAllPeople= async (searchQuery: string, page: number) => {
 
 }
 
+export const getAllSpecies= async (searchQuery: string, page: number) => {
+
+	return getAllt<srchResponseSpecies>(`/species/?query=${searchQuery}&page=${page}`);
+
+}
+
+export const getAllStarships= async (searchQuery: string, page: number) => {
+
+	return getAllt<srchResponseStarships>(`/starships/?query=${searchQuery}&page=${page}`);
+
+}
+
 export const getAllVehicles= async (searchQuery: string, page: number) => {
 
 	return getAllt<srchResponseVehicles>(`/vehicles/?query=${searchQuery}&page=${page}`);
+
+}
+
+export const getAllPlanets= async (searchQuery: string, page: number) => {
+
+	return getAllt<srchResponsePlanets>(`/planets/?query=${searchQuery}&page=${page}`);
 
 }

@@ -1,25 +1,25 @@
 import { useState, useEffect,} from "react";
 import ListGroup from "react-bootstrap/ListGroup";
-import { getAllSpecies } from "../services/SWAPI";
-import { srchResponseSpecies } from "../types";
+import { getAllMovies, getAllVehicles} from "../services/SWAPI";
+import { srchResponseFilm, srchResponseVehicles } from "../types";
 import Pagination from "../components/Pagination";
 import { useSearchParams, Link, } from "react-router-dom";
 import Form from 'react-bootstrap/Form'
 import { Button } from "react-bootstrap";
 
-export const SpeciesPage = () => {
+export const VehiclesPage = () => {
 const [error, setError] = useState<string | null>(null);
 const [loading, setLoading] = useState(true)
-const  [data, setData] = useState<srchResponseSpecies|null>(null) //svaret 
+const  [data, setData] = useState<srchResponseVehicles|null>(null) //svaret 
 const [searchParams, setSearchParams] = useSearchParams({query: '', page:'1'})
-const [searchResult, setSearchResult] = useState<srchResponseSpecies|null>(null)
+const [searchResult, setSearchResult] = useState<srchResponseVehicles|null>(null)
 const page = searchParams.get('page'|| "1")
 const query = searchParams.get('query')
 const [searchInput, setSearchInput] = useState('')
 
 const pageNumber = Number(page)
 
-const getSpecies = async (searchQuery: string | "", pageNumber: number | 1) => {
+const getVehicles = async (searchQuery: string | "", pageNumber: number | 1) => {
     setError(null);
     setLoading(true);
     setData(null);
@@ -28,9 +28,9 @@ const getSpecies = async (searchQuery: string | "", pageNumber: number | 1) => {
     try {
         let res;
         if (searchQuery) {
-        res = await getAllSpecies( searchQuery, pageNumber);
+        res = await getAllVehicles( searchQuery, pageNumber);
         } else {
-        res = await getAllSpecies( searchQuery , pageNumber);
+        res = await getAllVehicles( searchQuery , pageNumber);
         }
         setData(res);
         setSearchResult(res);
@@ -52,7 +52,7 @@ const getSpecies = async (searchQuery: string | "", pageNumber: number | 1) => {
 
 	}
     useEffect(() => {
-    getSpecies(query || '', pageNumber || 1);
+    getVehicles(query || '', pageNumber || 1);
     }, [query, pageNumber]);
 
 
@@ -60,7 +60,7 @@ const getSpecies = async (searchQuery: string | "", pageNumber: number | 1) => {
 
         <>
 
-        <h1>All the species</h1> 
+        <h1>All the Vehicles</h1> 
 
         <Form className="mb-4" onSubmit={handleSubmit}>
                     <Form.Group className="mb-3" controlId="searchQuery">
@@ -95,16 +95,16 @@ const getSpecies = async (searchQuery: string | "", pageNumber: number | 1) => {
                 <ListGroup className="mb-6">
                 {data.data.map((data) => (
 
-                    <ListGroup.Item
+                <ListGroup.Item
                     action
                     as={Link}
                     key={data.id}
                     variant="success"
-                    to={`/species/${data.id}`}
+                    to={`/Vehicles/${data.id}`}
                     >
                     <h2 className="h3">{data.name}</h2>
-                    <p className="text-muted small mb-0">Classification: {data.classification}</p>
-                    <p className="text-muted small mb-0">Designation: {data.designation}</p>
+                    <p className="text-muted small mb-0">model: {data.model}</p>
+                    <p className="text-muted small mb-0">Vehicle class: {data.vehicle_class}</p>
                     </ListGroup.Item>
 
                 ))}
@@ -130,4 +130,4 @@ const getSpecies = async (searchQuery: string | "", pageNumber: number | 1) => {
     )
 };
 
-export default SpeciesPage;
+export default VehiclesPage;
