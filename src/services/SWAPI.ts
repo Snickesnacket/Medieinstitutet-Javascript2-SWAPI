@@ -1,5 +1,5 @@
 import Search from '../components/Search'
-import {Film, Person, charactersLink, filmLink, srchResponseFilm, srchResponsePerson} from '../types/index'
+import {Film, Person, Vehicle, charactersLink, filmLink, srchResponseFilm, srchResponsePerson, srchResponseVehicles} from '../types/index'
 import axios from 'axios'
 
 const instance = axios.create({
@@ -50,6 +50,11 @@ export const getPersonId= async ( endpoint: string, id: number) => {
 
 }
 
+export const getVehicleId= async ( endpoint: string, id: number) => {
+		return get<Vehicle>(`/${endpoint}/${id}`)
+
+}
+
 
 export const getAllt= async <T>(endpoint: string) => {
 		return get(endpoint) as T
@@ -64,5 +69,11 @@ export const getAllMovies= async (searchQuery: string, page: number) => {
 export const getAllPeople= async (searchQuery: string, page: number) => {
 
 	return getAllt<srchResponsePerson>(`/people/?query=${searchQuery}&page=${page}`);
+
+}
+
+export const getAllVehicles= async (searchQuery: string, page: number) => {
+
+	return getAllt<srchResponseVehicles>(`/vehicles/?query=${searchQuery}&page=${page}`);
 
 }

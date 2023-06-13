@@ -14,6 +14,7 @@ import SpeciesPage from './pages/SpeciesPage'
 import FilmsPage from './pages/FilmsPage'
 import PersonPage from './pages/PersonPage'
 import FilmPage from './pages/filmPage'
+import VehiclePage from './pages/VehiclePage copy'
 
 const App = () => {
 	return (
@@ -27,6 +28,7 @@ const App = () => {
 		<Route path="/people/:id" element={<PersonPage />} /> 
         <Route path="/starships/" element={<StarshipsPage />} /> 
         <Route path="/vehicles/" element={<VehiclesPage />} /> 
+		<Route path="/Vehicles/:id" element={<VehiclePage />} /> 
         <Route path="/planets/" element={<PlanetsPage />} />  
         <Route path="/species/" element={<SpeciesPage />} /> 
         <Route path="/films/" element={<FilmsPage />} /> 

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
-import {  useParams,} from 'react-router-dom'
-import { Film, charactersLink} from '../types'
+import {  Link, useParams,} from 'react-router-dom'
+import { Film, charactersLink, planetsLink, speciesLink, starshipsLink, vehiclesLink} from '../types'
 import {  getFilmId } from '../services/SWAPI'
 import ListGroup from 'react-bootstrap/esm/ListGroup'
 import ListGroupItem from 'react-bootstrap/esm/ListGroupItem'
@@ -12,7 +12,11 @@ const PersonPage = () => {
     const [film, setFilm] = useState<Film>()
     const { id } = useParams()
 	const filmId = Number(id)
-     const [characters, setCharacters] = useState<charactersLink[]>();
+    const [characters, setCharacters] = useState<charactersLink[]>();
+    const [planets, setPlanets] = useState<planetsLink[]>();
+    const [starships, setStarships] = useState<starshipsLink[]>();
+    const [vehicles, setVehicles] = useState<vehiclesLink[]>();
+    const [species, setSpecies] = useState<speciesLink[]>()
 
     const getFilm= async ( filmId: number) => {
         setError(null)
@@ -24,6 +28,10 @@ const PersonPage = () => {
         console.log("the data",data)
         setFilm(data)
         setCharacters(data.characters);
+        setPlanets(data.planets)
+        setStarships(data.starships)
+        setVehicles(data.vehicles)
+        setSpecies(data.species)
         
 
         } catch(err: any) { 
@@ -55,18 +63,96 @@ const PersonPage = () => {
                         <p>Created {film.created}</p>
                         <p>Edited {film.edited}</p>
                         {characters && ( 
-                                <div> These are the Characters
+                                <div> 
+                                    <h3>These are the characters</h3>
                                 <ListGroup className='mb-3'>
                                     {characters.map((item => (
                                         <ListGroupItem
                                             action
                                             key={item.id}
-                                    ><p>{item.name}</p>
+                                            variant='success'
+                                        >
+                                            <Link to={`/People/${item.id}`}>
+                                            <p>{item.name}</p>
+                                            </Link>
                                     </ListGroupItem>
                                     )))}
                                 </ListGroup>
                             </div> 
                         )}
+                        {planets && ( 
+                                <div> 
+                                    <h3>These are the planets</h3>
+                                <ListGroup className='mb-3'>
+                                    {planets.map((item => (
+                                        <ListGroupItem
+                                            action
+                                            key={item.id}
+                                            variant='success'
+                                        >
+                                            <Link to={`/Planets/${item.id}`}>
+                                            <p>{item.name}</p>
+                                            </Link>
+                                    </ListGroupItem>
+                                    )))}
+                                </ListGroup>
+                            </div> 
+                        )}
+                        {starships&& ( 
+                                <div> 
+                                    <h3>These are the starships</h3>
+                                <ListGroup className='mb-3'>
+                                    {starships.map((item => (
+                                        <ListGroupItem
+                                            action
+                                            key={item.id}
+                                            variant='success'
+                                        >
+                                            <Link to={`/Starships/${item.id}`}>
+                                            <p>{item.name}</p>
+                                            </Link>
+                                    </ListGroupItem>
+                                    )))}
+                                </ListGroup>
+                            </div> 
+                        )}
+                        {vehicles&& ( 
+                                <div> 
+                                    <h3>These are the vehicles</h3>
+                                <ListGroup className='mb-3'>
+                                    {vehicles.map((item => (
+                                        <ListGroupItem
+                                            action
+                                            key={item.id}
+                                            variant='success'
+                                        >
+                                            <Link to={`/Vehicles/${item.id}`}>
+                                            <p>{item.name}</p>
+                                            </Link>
+                                    </ListGroupItem>
+                                    )))}
+                                </ListGroup>
+                            </div> 
+                        )}
+                        {species&& ( 
+                                <div> 
+                                    <h3>These are the species</h3>
+                                <ListGroup className='mb-3'>
+                                    {species.map((item => (
+                                        <ListGroupItem
+                                            action
+                                            key={item.id}
+                                            variant='success'
+                                        >
+                                            <Link to={`/Species/${item.id}`}>
+                                            <p>{item.name}</p>
+                                            </Link>
+                                    </ListGroupItem>
+                                    )))}
+                                </ListGroup>
+                            </div> 
+                        )}
+
                         </div>
                 </div>
             )}

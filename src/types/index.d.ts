@@ -38,6 +38,24 @@ export type Film = {
     species: speciesLink []
 }
 
+export type Vehicle = {
+    id: number,
+    name: string,
+    model: string, 
+    vehicle_class: string,
+    manufacturer: string,
+    length: string,
+    cost_in_credits: string,
+    crew: string,
+    passengers: string,
+    max_atmosphering_speed: string, 
+    cargo_capacity: string,
+    consumables: string,
+    created: string,
+    edited: string, 
+    pilots: speciesLink[],
+    films: filmLink[],
+}
 
 export type srchResponsePerson = {
     current_page: number, 
@@ -55,8 +73,24 @@ export type srchResponsePerson = {
     total: number,
 }
 export type srchResponseFilm = {
-     current_page: number, 
+    current_page: number, 
     data: Film []
+    first_page_url: string,
+    from: number, 
+    last_page: number, 
+    last_page_url: string
+    links: link []
+    next_page_url: string, 
+    path: string,
+    per_page: number, 
+    prev_page_ur:null, 
+    to: number, 
+    total: number,
+}
+
+export type srchResponseVehicles = {
+    current_page: number, 
+    data: Vehicles[]
     first_page_url: string,
     from: number, 
     last_page: number, 
@@ -84,16 +118,16 @@ export type filmLink = {
 
 export type speciesLink = {
     id: number, 
-    title: string
+    name: string
 }
 
-export type starshipsLInk = {
+export type starshipsLink = {
     id: number, 
     name: string
 }
 export type vehiclesLink = {
     id: number, 
-    title: string
+    name: string
 }
 
 export type charactersLink = {
@@ -101,3 +135,8 @@ export type charactersLink = {
   name: string;
 };
 
+
+export type planetsLink = {
+    id: number, 
+    name: string
+}
