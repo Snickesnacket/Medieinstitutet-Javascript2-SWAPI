@@ -1,6 +1,6 @@
 import { useState, useEffect,} from "react";
 import ListGroup from "react-bootstrap/ListGroup";
-import { getAllStarships, getQueryStarships} from "../services/SWAPI";
+import { getAll, getAllByQuery} from "../services/SWAPI";
 import {  srchResponseStarships,} from "../types";
 import Pagination from "../components/Pagination";
 import { useSearchParams, Link, } from "react-router-dom";
@@ -28,9 +28,9 @@ const getStarships = async (searchQuery: string | "", pageNumber: number | 1) =>
     try {
         let res;
         if (searchQuery) {
-        res = await getQueryStarships( searchQuery, pageNumber);
+        res = await getAllByQuery<srchResponseStarships>(searchQuery, 'starships', pageNumber);
         } else {
-        res = await getAllStarships( searchQuery , pageNumber);
+        res = await getAll<srchResponseStarships>('starships', pageNumber);
         }
         setData(res);
         setSearchResult(res);
@@ -40,6 +40,7 @@ const getStarships = async (searchQuery: string | "", pageNumber: number | 1) =>
 
     setLoading(false);
 };
+
     const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault()
 

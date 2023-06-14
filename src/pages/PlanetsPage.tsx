@@ -1,6 +1,6 @@
 import { useState, useEffect,} from "react";
 import ListGroup from "react-bootstrap/ListGroup";
-import {  getAllPlanets, getQueryPlanets } from "../services/SWAPI";
+import {  getAll, getAllByQuery } from "../services/SWAPI";
 import {  srchResponsePlanets,} from "../types";
 import Pagination from "../components/Pagination";
 import { useSearchParams, Link, } from "react-router-dom";
@@ -23,14 +23,14 @@ const getPlanets = async (searchQuery: string | "", pageNumber: number | 1) => {
     setError(null);
     setLoading(true);
     setData(null);
-    setSearchInput('')
+    setSearchInput('');
 
     try {
         let res;
         if (searchQuery) {
-        res = await getQueryPlanets( searchQuery, pageNumber);
+        res = await getAllByQuery<srchResponsePlanets>(searchQuery, 'planets', pageNumber);
         } else {
-        res = await getAllPlanets( searchQuery , pageNumber);
+        res = await getAll<srchResponsePlanets>('planets', pageNumber);
         }
         setData(res);
         setSearchResult(res);
@@ -39,7 +39,7 @@ const getPlanets = async (searchQuery: string | "", pageNumber: number | 1) => {
     }
 
     setLoading(false);
-};
+    };
     const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault()
 

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import {  Link, useParams,} from 'react-router-dom'
 import { Vehicles, filmLink, theLink} from '../types'
-import {  getVehicleId } from '../services/SWAPI'
+import {  getById } from '../services/SWAPI'
 import ListGroup from 'react-bootstrap/esm/ListGroup'
 import ListGroupItem from 'react-bootstrap/esm/ListGroupItem'
 
@@ -21,7 +21,7 @@ const VehiclePage = () => {
         console.log('hello there!')
 
         try {
-        const data = await getVehicleId( VehicleId)
+        const data = await getById<Vehicles>('vehicles', VehicleId);
         console.log("the data",data)
         setData(data)
         setFilm(data.films);

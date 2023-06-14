@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import {  Link, useParams} from 'react-router-dom'
 import { Person, Planet, filmLink} from '../types'
-import {  getPlanetId } from '../services/SWAPI'
+import {  getById} from '../services/SWAPI'
 import ListGroup from 'react-bootstrap/esm/ListGroup'
 import ListGroupItem from 'react-bootstrap/esm/ListGroupItem'
 
@@ -22,7 +22,7 @@ const PlanetPage = () => {
         console.log('hello there!')
 
         try {
-        const data = await getPlanetId(planetId)
+        const data = await getById<Planet>('planets', planetId);
         console.log("the data",data)
         setPlanet(data)
         setPerson(data.residents)

@@ -1,7 +1,6 @@
 
 
 export type Person = {
-    person: any
     id: number,
     name: string,
     birth_year: string, 
@@ -92,7 +91,7 @@ export type Planet = {
     population: string,
     created: string,
     edited: string, 
-    residents: person [], 
+    residents: Person [], 
     films: filmLink[],
 }
 

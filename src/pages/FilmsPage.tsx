@@ -1,12 +1,13 @@
 
 import { useState, useEffect,} from "react";
 import ListGroup from "react-bootstrap/ListGroup";
-import { getAllMovies, getQueryFilms} from "../services/SWAPI";
+import { getAll, getAllByQuery} from "../services/SWAPI";
 import { srchResponseFilm } from "../types";
 import Pagination from "../components/Pagination";
 import { useSearchParams, Link, } from "react-router-dom";
 import Form from 'react-bootstrap/Form'
 import { Button } from "react-bootstrap";
+
 
 export const FilmsPage = () => {
 const [error, setError] = useState<string | null>(null);
@@ -29,9 +30,9 @@ const getFilms = async (searchQuery: string | "", pageNumber: number | 1) => {
     try {
         let res;
         if (searchQuery) {
-        res = await getQueryFilms( searchQuery, pageNumber);
+        res = await getAllByQuery<srchResponseFilm>(searchQuery, 'films', pageNumber);
         } else {
-        res = await getAllMovies( searchQuery , pageNumber);
+        res = await getAll<srchResponseFilm>('films', pageNumber);
         }
         setData(res);
         setSearchResult(res);

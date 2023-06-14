@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import {  Link, useParams} from 'react-router-dom'
 import { Person, filmLink, theLink} from '../types'
-import {  getPersonId } from '../services/SWAPI'
+import { getById} from '../services/SWAPI'
 import ListGroup from 'react-bootstrap/esm/ListGroup'
 import ListGroupItem from 'react-bootstrap/esm/ListGroupItem'
 
@@ -24,7 +24,7 @@ const PersonPage = () => {
         console.log('hello there!')
 
         try {
-        const data = await getPersonId( personId)
+        const data = await getById<Person>('people', personId);
         console.log("the data",data)
         setData(data)
         setStarships(data.starships)
