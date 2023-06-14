@@ -21,7 +21,7 @@ const VehiclePage = () => {
         console.log('hello there!')
 
         try {
-        const data = await getVehicleId('vehicles', VehicleId)
+        const data = await getVehicleId( VehicleId)
         console.log("the data",data)
         setData(data)
         setFilm(data.films);

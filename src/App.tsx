@@ -10,13 +10,14 @@ import StarshipsPage from './pages/StarshipsPage'
 import VehiclesPage from './pages/VehiclesPage'
 import PlanetsPage from './pages/PlanetsPage'
 import SpeciesPage from './pages/SpeciesPage'
-import FilmsPage from './pages/FilmsPage'
 import PersonPage from './pages/PersonPage'
 import VehiclePage from './pages/VehiclePage'
 import SpeciePage from './pages/SpeciePage'
 import StarshipPage from './pages/StarshipPage'
 import PlanetPage from './pages/PlanetPage'
-import FilmPage from './pages/FilmPage'
+import FilmPage from './pages/filmPage'
+import { FilmsPage } from './pages/FilmsPage'
+
 
 const App = () => {
 	return (

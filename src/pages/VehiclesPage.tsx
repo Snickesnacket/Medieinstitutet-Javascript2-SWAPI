@@ -1,6 +1,6 @@
 import { useState, useEffect,} from "react";
 import ListGroup from "react-bootstrap/ListGroup";
-import { getAllVehicles} from "../services/SWAPI";
+import { getAllVehicles, getQueryVehicles} from "../services/SWAPI";
 import { srchResponseVehicles } from "../types";
 import Pagination from "../components/Pagination";
 import { useSearchParams, Link, } from "react-router-dom";
@@ -28,7 +28,7 @@ const getVehicles = async (searchQuery: string | "", pageNumber: number | 1) => 
     try {
         let res;
         if (searchQuery) {
-        res = await getAllVehicles( searchQuery, pageNumber);
+        res = await getQueryVehicles( searchQuery, pageNumber);
         } else {
         res = await getAllVehicles( searchQuery , pageNumber);
         }

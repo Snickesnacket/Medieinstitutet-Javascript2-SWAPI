@@ -1,6 +1,6 @@
 import { useState, useEffect,} from "react";
 import ListGroup from "react-bootstrap/ListGroup";
-import {  getAllPlanets } from "../services/SWAPI";
+import {  getAllPlanets, getQueryPlanets } from "../services/SWAPI";
 import {  srchResponsePlanets,} from "../types";
 import Pagination from "../components/Pagination";
 import { useSearchParams, Link, } from "react-router-dom";
@@ -28,7 +28,7 @@ const getPlanets = async (searchQuery: string | "", pageNumber: number | 1) => {
     try {
         let res;
         if (searchQuery) {
-        res = await getAllPlanets( searchQuery, pageNumber);
+        res = await getQueryPlanets( searchQuery, pageNumber);
         } else {
         res = await getAllPlanets( searchQuery , pageNumber);
         }

@@ -1,6 +1,6 @@
 import { useState, useEffect,} from "react";
 import ListGroup from "react-bootstrap/ListGroup";
-import { getAllPeople } from "../services/SWAPI";
+import { getAllPeople, getQuery} from "../services/SWAPI";
 import { srchResponsePerson } from "../types";
 import Pagination from "../components/Pagination";
 import { useSearchParams, Link, } from "react-router-dom";
@@ -28,7 +28,7 @@ const getPeople = async (searchQuery: string | "", pageNumber: number | 1) => {
     try {
         let res;
         if (searchQuery) {
-        res = await getAllPeople( searchQuery, pageNumber);
+        res = await getQuery( searchQuery, pageNumber);
         } else {
         res = await getAllPeople( searchQuery , pageNumber);
         }

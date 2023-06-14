@@ -22,7 +22,7 @@ const PlanetPage = () => {
         console.log('hello there!')
 
         try {
-        const data = await getPlanetId('planets', planetId)
+        const data = await getPlanetId(planetId)
         console.log("the data",data)
         setPlanet(data)
         setPerson(data.residents)

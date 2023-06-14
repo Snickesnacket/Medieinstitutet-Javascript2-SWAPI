@@ -15,13 +15,13 @@ const SpeciePage = () => {
     const [film, setFilm] = useState<filmLink[]>()
     const [people, setPeople] = useState<theLink[]>()
 
-    const getSpecie = async ( personId: number) => {
+    const getSpecie = async ( specieId: number) => {
         setError(null)
         setLoading(true)
         console.log('hello there!')
 
         try {
-        const data = await getSpecieId('specie', personId)
+        const data = await getSpecieId( specieId)
         console.log("the data",data)
         setData(data)
         setPeople(data.people);
@@ -61,39 +61,42 @@ const SpeciePage = () => {
                         <p>Created: {data.created}</p>
                         <p>Edited: {data.edited}</p>
                         <p>Homeword: {data.homeworld.name}</p>
-                        <div>   
-                            <h3>These are the people</h3>
-                            <ListGroup className='mb-3'>
-                                {data.people.map(item => (
-                                <ListGroupItem
-                                    action
-                                    key={item.id}
-                                    variant='success'
-                                >
-                                    <Link to={`/people/${item.id}`}>
-                                    <p>{item.name}</p>
-                                    </Link>
-                                </ListGroupItem>
-                                ))}
-                            </ListGroup>
-                            </div>
-
-                            <div>   
-                            <h3>These are the Films</h3>
-                            <ListGroup className='mb-3'>
-                                {data.film.map(item => (
-                                <ListGroupItem
-                                    action
-                                    key={item.id}
-                                    variant='success'
-                                >
-                                    <Link to={`/films/${item.id}`}>
-                                    <p>{item.title}</p>
-                                    </Link>
-                                </ListGroupItem>
-                                ))}
-                            </ListGroup>
-                            </div>
+                        {people && ( 
+                                <div> 
+                                    <h3>These are the characters</h3>
+                                <ListGroup className='mb-3'>
+                                    {people.map((item => (
+                                        <ListGroupItem
+                                            action
+                                            key={item.id}
+                                            variant='success'
+                                        >
+                                            <Link to={`/People/${item.id}`}>
+                                            <p>{item.name}</p>
+                                            </Link>
+                                    </ListGroupItem>
+                                    )))}
+                                </ListGroup>
+                            </div> 
+                        )}
+                        {film && ( 
+                                <div> 
+                                    <h3>These are the films</h3>
+                                <ListGroup className='mb-3'>
+                                    {film.map((item => (
+                                        <ListGroupItem
+                                            action
+                                            key={item.id}
+                                            variant='success'
+                                        >
+                                            <Link to={`/Films/${item.id}`}>
+                                            <p>{item.title}</p>
+                                            </Link>
+                                    </ListGroupItem>
+                                    )))}
+                                </ListGroup>
+                            </div> 
+                        )}
                         </div>
                 </div>
             )}

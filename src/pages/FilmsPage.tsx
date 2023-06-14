@@ -1,7 +1,7 @@
 
 import { useState, useEffect,} from "react";
 import ListGroup from "react-bootstrap/ListGroup";
-import { getAllMovies} from "../services/SWAPI";
+import { getAllMovies, getQueryFilms} from "../services/SWAPI";
 import { srchResponseFilm } from "../types";
 import Pagination from "../components/Pagination";
 import { useSearchParams, Link, } from "react-router-dom";
@@ -29,7 +29,7 @@ const getFilms = async (searchQuery: string | "", pageNumber: number | 1) => {
     try {
         let res;
         if (searchQuery) {
-        res = await getAllMovies( searchQuery, pageNumber);
+        res = await getQueryFilms( searchQuery, pageNumber);
         } else {
         res = await getAllMovies( searchQuery , pageNumber);
         }
@@ -131,4 +131,4 @@ const getFilms = async (searchQuery: string | "", pageNumber: number | 1) => {
     )
 };
 
-export default FilmsPage;
+

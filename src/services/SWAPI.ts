@@ -1,4 +1,4 @@
-import Search from '../components/Search'
+
 import {Film, Person, Planet, Species, Starship, Vehicles, filmLink, srchResponseFilm, srchResponsePerson, srchResponsePlanets, srchResponseSpecies, srchResponseStarships, srchResponseVehicles, theLink} from '../types/index'
 import axios from 'axios'
 
@@ -17,27 +17,49 @@ const get = async <T>(endpoint: string) => {
 
 const BASE_URL = 'https://swapi.thehiveresistance.com/api'
 
-/* export const getAll= async ( endpoint: string, page: number) => {
+export const getAll= async ( endpoint: string, page: number) => {
 		return get<srchResponsePerson>(`/${endpoint}/?page=${page}`);
 
 }
 
-export const getQuery= async ( endpoint: string, searchQuery: string, page = 1) => {
-		return get<srchResponsePerson>(`/${endpoint}/?search=${searchQuery}&page=${page}`);
-
-}
 
 export const getAllFilms= async ( endpoint: string, page: number) => {
 		return get<srchResponseFilm>(`/${endpoint}/?page=${page}`);
 
 }
 
-export const getQueryFilm= async ( endpoint: string, searchQuery: string, page: number) => {
-		return get<srchResponseFilm>(`/${endpoint}/?search=${searchQuery}&page=${page}`);
- */
 
-export const getFilmId= async ( endpoint: string, id: number) => {
-		return get<Film>(`/${endpoint}/${id}`)
+export const getQuery= async ( searchQuery: string, page = 1) => {
+		return get<srchResponsePerson>(`/people/?search=${searchQuery}&page=${page}`);
+
+}
+
+export const getQueryPlanets= async ( searchQuery: string, page = 1) => {
+		return get<srchResponsePlanets>(`/planets/?search=${searchQuery}&page=${page}`);
+
+}
+
+export const getQuerySpecies= async ( searchQuery: string, page = 1) => {
+		return get<srchResponseSpecies>(`/species/?search=${searchQuery}&page=${page}`);
+
+}
+
+export const getQueryVehicles= async ( searchQuery: string, page = 1) => {
+		return get<srchResponseVehicles>(`/vehicles/?search=${searchQuery}&page=${page}`);
+
+}
+
+export const getQueryStarships= async ( searchQuery: string, page = 1) => {
+		return get<srchResponseStarships>(`/starships/?search=${searchQuery}&page=${page}`);
+
+}
+
+export const getQueryFilms = async (searchQuery: string, page = 1) => {
+  return get<srchResponseFilm>(`/films/?search=${searchQuery}&page=${page}`);
+}; 
+
+export const getFilmId= async ( id: number) => {
+		return get<Film>(`/films/${id}`)
 
 }
 
@@ -45,28 +67,29 @@ export const getItem= async ( endpoint: string, id: number) => {
 		return get<theLink>(`/${endpoint}/${id}`)
 
 }
-export const getPersonId= async ( endpoint: string, id: number) => {
-		return get<Person>(`/${endpoint}/${id}`)
+export const getPersonId= async ( id: number) => {
+		return get<Person>(`/people/${id}`)
 
 }
 
-export const getPlanetId= async ( endpoint: string, id: number) => {
-		return get<Planet>(`/${endpoint}/${id}`)
+export const getPlanetId= async ( id: number) => {
+		return get<Planet>(`/planets/${id}`)
 
 }
-export const getVehicleId= async ( endpoint: string, id: number) => {
-		return get<Vehicles>(`/${endpoint}/${id}`)
+export const getVehicleId= async ( id: number) => {
+		return get<Vehicles>(`/vehicles/${id}`)
 
 }
-export const getSpecieId= async ( endpoint: string, id: number) => {
-		return get<Species>(`/${endpoint}/${id}`)
+export const getSpecieId= async ( id: number) => {
+		return get<Species>(`/species/${id}`)
 
 }
 
-export const getStarshipId= async ( endpoint: string, id: number) => {
-		return get<Starship>(`/${endpoint}/${id}`)
+export const getStarshipId= async ( id: number) => {
+		return get<Starship>(`/starships/${id}`)
 
 }
+
 
 export const getAllt= async <T>(endpoint: string) => {
 		return get(endpoint) as T

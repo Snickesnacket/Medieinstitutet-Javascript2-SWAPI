@@ -20,7 +20,7 @@ const StarshipPage = () => {
         console.log('hello there!')
 
         try {
-        const data = await getStarshipId('starships', starshipId)
+        const data = await getStarshipId( starshipId)
         console.log("the data",data)
         setData(data)
         setFilm(data.films);

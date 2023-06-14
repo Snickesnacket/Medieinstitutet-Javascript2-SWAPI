@@ -23,7 +23,7 @@ const FilmPage = () => {
         console.log('hello there!')
 
         try {
-        const data = await getFilmId('films', filmId)
+        const data = await getFilmId(filmId)
         console.log("the data",data)
         setFilm(data)
         setCharacters(data.characters);

@@ -1,6 +1,6 @@
 import { useState, useEffect,} from "react";
 import ListGroup from "react-bootstrap/ListGroup";
-import { getAllSpecies } from "../services/SWAPI";
+import { getAllSpecies, getQuerySpecies } from "../services/SWAPI";
 import { srchResponseSpecies } from "../types";
 import Pagination from "../components/Pagination";
 import { useSearchParams, Link, } from "react-router-dom";
@@ -28,7 +28,7 @@ const getSpecies = async (searchQuery: string | "", pageNumber: number | 1) => {
     try {
         let res;
         if (searchQuery) {
-        res = await getAllSpecies( searchQuery, pageNumber);
+        res = await getQuerySpecies( searchQuery, pageNumber);
         } else {
         res = await getAllSpecies( searchQuery , pageNumber);
         }

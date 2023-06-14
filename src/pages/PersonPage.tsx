@@ -24,7 +24,7 @@ const PersonPage = () => {
         console.log('hello there!')
 
         try {
-        const data = await getPersonId('people', personId)
+        const data = await getPersonId( personId)
         console.log("the data",data)
         setData(data)
         setStarships(data.starships)
