@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react'
 import {  Link, useParams,} from 'react-router-dom'
-import { Starship, filmLink, theLink,} from '../types'
+import { Starship, FilmLink, TheLink,} from '../types'
 import {  getById,  } from '../services/SWAPI'
 import ListGroup from 'react-bootstrap/esm/ListGroup'
 import ListGroupItem from 'react-bootstrap/esm/ListGroupItem'
+import { Alert } from 'react-bootstrap'
 
 const StarshipPage = () => {
     const [error, setError] = useState<string|null>(null)
@@ -11,8 +12,8 @@ const StarshipPage = () => {
     const [data, setData] = useState<Starship>()
     const { id } = useParams()
 	const starshipId = Number(id)
-    const [film, setFilm] = useState<filmLink[]>()
-    const [pilot, setPilot] = useState<theLink[]>()
+    const [film, setFilm] = useState<FilmLink[]>()
+    const [pilot, setPilot] = useState<TheLink[]>()
 
     const getStarship= async ( starshipId: number) => {
         setError(null)
@@ -20,14 +21,13 @@ const StarshipPage = () => {
         console.log('hello there!')
 
         try {
-         const data = await getById<Starship>('starships', starshipId);
+        const data = await getById<Starship>('starships', starshipId);
         console.log("the data",data)
         setData(data)
         setFilm(data.films);
         setPilot(data.pilots)
-        
-        
 
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch(err: any) { 
         setError(err.message)
         console.log(" this is the error",err.message)
@@ -45,6 +45,7 @@ const StarshipPage = () => {
     
         <>
         {loading && <p>🤔 Loading...</p>}
+        {error && <Alert variant='warning'>{error}</Alert>}
             {data &&  (
                 <div className="mb-3">
                         <div>

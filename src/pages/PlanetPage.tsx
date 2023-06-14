@@ -4,6 +4,7 @@ import { Person, Planet, FilmLink} from '../types'
 import {  getById} from '../services/SWAPI'
 import ListGroup from 'react-bootstrap/esm/ListGroup'
 import ListGroupItem from 'react-bootstrap/esm/ListGroupItem'
+import { Alert } from 'react-bootstrap'
 
 
 const PlanetPage = () => {
@@ -27,9 +28,8 @@ const PlanetPage = () => {
         setPlanet(data)
         setPerson(data.residents)
         setFilms(data.films)
-        
-        
 
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch(err: any) { 
         setError(err.message)
         console.log(" this is the error",err.message)
@@ -47,6 +47,7 @@ const PlanetPage = () => {
     
         <>
         {loading && <p>🤔 Loading...</p>}
+        {error && <Alert variant='warning'>{error}</Alert>}
             {planet && (
                 <div className="mb-3">
                         <div>

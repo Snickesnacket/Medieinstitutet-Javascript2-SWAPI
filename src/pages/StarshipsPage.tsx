@@ -5,14 +5,13 @@ import {  SearchResponse, Starship} from "../types";
 import Pagination from "../components/Pagination";
 import { useSearchParams, Link, } from "react-router-dom";
 import Form from 'react-bootstrap/Form'
-import { Button } from "react-bootstrap";
+import { Alert, Button } from "react-bootstrap";
 
 export const StarshipsPage = () => {
 const [error, setError] = useState<string | null>(null);
 const [loading, setLoading] = useState(true)
 const  [data, setData] = useState<SearchResponse<Starship>|null>(null) //svaret 
 const [searchParams, setSearchParams] = useSearchParams({query: '', page:'1'})
-const [searchResult, setSearchResult] = useState<SearchResponse<Starship>|null>(null)
 const page = searchParams.get('page'|| "1")
 const query = searchParams.get('query')
 const [searchInput, setSearchInput] = useState('')
@@ -33,7 +32,7 @@ const getStarships = async (searchQuery: string | "", pageNumber: number | 1) =>
         res = await getAll<SearchResponse<Starship>>('starships', pageNumber);
         }
         setData(res);
-        setSearchResult(res);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
         setError(err.message);
     }
@@ -82,7 +81,7 @@ const getStarships = async (searchQuery: string | "", pageNumber: number | 1) =>
 							>Search</Button>
 						</div>
                 </Form>
-
+		{error && <Alert variant='warning'>{error}</Alert>}
         {loading ? (
         <p>🤔 Loading...</p>
         ) : (

@@ -4,6 +4,7 @@ import { Vehicle, FilmLink, TheLink} from '../types'
 import {  getById } from '../services/SWAPI'
 import ListGroup from 'react-bootstrap/esm/ListGroup'
 import ListGroupItem from 'react-bootstrap/esm/ListGroupItem'
+import { Alert } from 'react-bootstrap'
 
 
 const VehiclePage = () => {
@@ -27,8 +28,7 @@ const VehiclePage = () => {
         setFilm(data.films);
         setPilot(data.pilots)
         
-        
-
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch(err: any) { 
         setError(err.message)
         console.log(" this is the error",err.message)
@@ -46,6 +46,7 @@ const VehiclePage = () => {
     
         <>
         {loading && <p>🤔 Loading...</p>}
+        {error && <Alert variant='warning'>{error}</Alert>}
             {data &&  (
                 <div className="mb-3">
                         <div>
