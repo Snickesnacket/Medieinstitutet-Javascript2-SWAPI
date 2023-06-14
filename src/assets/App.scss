@@ -1,5 +1,24 @@
 @import "bootstrap/scss/bootstrap";
+* {
+  box-sizing: border-box;
+}
 
 h1, h2, h3, h4, h5, h6 {
 	margin-bottom: 0.75em;
+}
+
+.home-page {
+  position: relative;
+
+  .background-image {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/5A92131654C1E0B1A4C072A327E49FB30CA8BDED279852FB32CAD9B33B4AAAB1/scale?width=2880&aspectRatio=1.78&format=jpeg');
+    background-size: cover;
+    background-position: bottom;
+    z-index: -1;
+  }
 }

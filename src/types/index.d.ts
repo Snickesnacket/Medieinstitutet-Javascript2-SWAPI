@@ -1,6 +1,7 @@
 
 
 export type Person = {
+    person: any
     id: number,
     name: string,
     birth_year: string, 

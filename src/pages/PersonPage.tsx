@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import {  Link, useParams, useNavigate} from 'react-router-dom'
+import {  Link, useParams} from 'react-router-dom'
 import { Person, filmLink, theLink} from '../types'
 import {  getPersonId } from '../services/SWAPI'
 import ListGroup from 'react-bootstrap/esm/ListGroup'

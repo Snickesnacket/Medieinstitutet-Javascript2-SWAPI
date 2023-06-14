@@ -1,16 +1,11 @@
-import Button from 'react-bootstrap/Button'
-import { Link } from 'react-router-dom'
+import '../assets/App.scss'
 
 const HomePage = () => {
 	return (
-		<>
-			<h1>Hello fella!</h1>
-
-			<Link to="/search">
-				<Button variant="primary">Use the Search, you must!</Button>
-			</Link>
-		</>
-	)
+    <div className="home-page">
+      <div className="background-image"></div>
+    </div>
+  );
 }
 
 export default HomePage

@@ -43,6 +43,7 @@ const getPeople = async (searchQuery: string | "", pageNumber: number | 1) => {
     const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault()
 
+		// haxx0r
 		if (!searchInput.trim().length) {
 			return
 		}

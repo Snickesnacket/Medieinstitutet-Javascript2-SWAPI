@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
-import {  Link, useParams, useNavigate} from 'react-router-dom'
-import { Person, Planet, filmLink, theLink} from '../types'
+import {  Link, useParams} from 'react-router-dom'
+import { Person, Planet, filmLink} from '../types'
 import {  getPlanetId } from '../services/SWAPI'
 import ListGroup from 'react-bootstrap/esm/ListGroup'
 import ListGroupItem from 'react-bootstrap/esm/ListGroupItem'

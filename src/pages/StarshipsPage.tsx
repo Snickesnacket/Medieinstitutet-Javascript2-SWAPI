@@ -1,6 +1,6 @@
 import { useState, useEffect,} from "react";
 import ListGroup from "react-bootstrap/ListGroup";
-import { getAllMovies, getAllStarships, getAllVehicles} from "../services/SWAPI";
+import { getAllStarships} from "../services/SWAPI";
 import {  srchResponseStarships,} from "../types";
 import Pagination from "../components/Pagination";
 import { useSearchParams, Link, } from "react-router-dom";

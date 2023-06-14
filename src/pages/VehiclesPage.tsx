@@ -1,7 +1,7 @@
 import { useState, useEffect,} from "react";
 import ListGroup from "react-bootstrap/ListGroup";
-import { getAllMovies, getAllVehicles} from "../services/SWAPI";
-import { srchResponseFilm, srchResponseVehicles } from "../types";
+import { getAllVehicles} from "../services/SWAPI";
+import { srchResponseVehicles } from "../types";
 import Pagination from "../components/Pagination";
 import { useSearchParams, Link, } from "react-router-dom";
 import Form from 'react-bootstrap/Form'
