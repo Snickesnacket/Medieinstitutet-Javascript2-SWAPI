@@ -1,5 +1,5 @@
 import axios, { AxiosInstance } from 'axios';
-import { Film, Person, Planet, Species, Starship } from '../types/index';
+
 
 const api: AxiosInstance = axios.create({
 	baseURL: 'https://swapi.thehiveresistance.com/api',
