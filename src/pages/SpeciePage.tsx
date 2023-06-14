@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import {  Link, useParams,} from 'react-router-dom'
-import { Species, filmLink, theLink} from '../types'
+import { Species, FilmLink, TheLink} from '../types'
 import {  getById } from '../services/SWAPI'
 import ListGroup from 'react-bootstrap/esm/ListGroup'
 import ListGroupItem from 'react-bootstrap/esm/ListGroupItem'
@@ -12,8 +12,8 @@ const SpeciePage = () => {
     const [data, setData] = useState<Species>()
     const { id } = useParams()
 	const specieId = Number(id)
-    const [film, setFilm] = useState<filmLink[]>()
-    const [people, setPeople] = useState<theLink[]>()
+    const [film, setFilm] = useState<FilmLink[]>()
+    const [people, setPeople] = useState<TheLink[]>()
 
     const getSpecie = async ( specieId: number) => {
         setError(null)
@@ -25,7 +25,7 @@ const SpeciePage = () => {
         console.log("the data",data)
         setData(data)
         setPeople(data.people);
-        setFilm(data.film)
+        setFilm(data.films)
         
         
 
@@ -55,7 +55,7 @@ const SpeciePage = () => {
                         <p>Average height: {data.average_height}</p>
                         <p>Lifespan: {data.average_lifespan}</p>
                         <p>Eyecolor: {data.eye_color}</p>
-                        <p>Haircolor: {data.hair_coor}</p>
+                        <p>Haircolor: {data.hair_color}</p>
                         <p>Skincolor: {data.skin_color}</p>
                         <p>Language: {data.language}</p>
                         <p>Created: {data.created}</p>

@@ -1,7 +1,7 @@
 import { useState, useEffect,} from "react";
 import ListGroup from "react-bootstrap/ListGroup";
 import { getAll, getAllByQuery} from "../services/SWAPI";
-import {  srchResponseStarships,} from "../types";
+import {  SearchResponse, Starship} from "../types";
 import Pagination from "../components/Pagination";
 import { useSearchParams, Link, } from "react-router-dom";
 import Form from 'react-bootstrap/Form'
@@ -10,9 +10,9 @@ import { Button } from "react-bootstrap";
 export const StarshipsPage = () => {
 const [error, setError] = useState<string | null>(null);
 const [loading, setLoading] = useState(true)
-const  [data, setData] = useState<srchResponseStarships|null>(null) //svaret 
+const  [data, setData] = useState<SearchResponse<Starship>|null>(null) //svaret 
 const [searchParams, setSearchParams] = useSearchParams({query: '', page:'1'})
-const [searchResult, setSearchResult] = useState<srchResponseStarships|null>(null)
+const [searchResult, setSearchResult] = useState<SearchResponse<Starship>|null>(null)
 const page = searchParams.get('page'|| "1")
 const query = searchParams.get('query')
 const [searchInput, setSearchInput] = useState('')
@@ -28,9 +28,9 @@ const getStarships = async (searchQuery: string | "", pageNumber: number | 1) =>
     try {
         let res;
         if (searchQuery) {
-        res = await getAllByQuery<srchResponseStarships>(searchQuery, 'starships', pageNumber);
+        res = await getAllByQuery<SearchResponse<Starship>>(searchQuery, 'starships', pageNumber);
         } else {
-        res = await getAll<srchResponseStarships>('starships', pageNumber);
+        res = await getAll<SearchResponse<Starship>>('starships', pageNumber);
         }
         setData(res);
         setSearchResult(res);

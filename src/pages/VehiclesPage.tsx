@@ -1,7 +1,7 @@
 import { useState, useEffect,} from "react";
 import ListGroup from "react-bootstrap/ListGroup";
 import { getAll, getAllByQuery} from "../services/SWAPI";
-import { srchResponseVehicles } from "../types";
+import { SearchResponse, Vehicle } from "../types";
 import Pagination from "../components/Pagination";
 import { useSearchParams, Link, } from "react-router-dom";
 import Form from 'react-bootstrap/Form'
@@ -10,9 +10,9 @@ import { Button } from "react-bootstrap";
 export const VehiclesPage = () => {
 const [error, setError] = useState<string | null>(null);
 const [loading, setLoading] = useState(true)
-const  [data, setData] = useState<srchResponseVehicles|null>(null) //svaret 
+const  [data, setData] = useState<SearchResponse<Vehicle>|null>(null) //svaret 
 const [searchParams, setSearchParams] = useSearchParams({query: '', page:'1'})
-const [searchResult, setSearchResult] = useState<srchResponseVehicles|null>(null)
+const [searchResult, setSearchResult] = useState<SearchResponse<Vehicle>|null>(null)
 const page = searchParams.get('page'|| "1")
 const query = searchParams.get('query')
 const [searchInput, setSearchInput] = useState('')
@@ -28,9 +28,9 @@ const getVehicles = async (searchQuery: string | "", pageNumber: number | 1) => 
     try {
         let res;
         if (searchQuery) {
-        res = await getAllByQuery<srchResponseVehicles>(searchQuery, 'vehicles', pageNumber);
+        res = await getAllByQuery<SearchResponse<Vehicle>>(searchQuery, 'vehicles', pageNumber);
         } else {
-        res = await getAll<srchResponseVehicles>('vehicles', pageNumber);
+        res = await getAll<SearchResponse<Vehicle>>('vehicles', pageNumber);
         }
         setData(res);
         setSearchResult(res);

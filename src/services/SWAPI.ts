@@ -1,5 +1,5 @@
 import axios, { AxiosInstance } from 'axios';
-import { Film, Person, Planet, Species, Starship, Vehicles, filmLink, srchResponseFilm, srchResponsePerson, srchResponsePlanets, srchResponseSpecies, srchResponseStarships, srchResponseVehicles, theLink } from '../types/index';
+import { Film, Person, Planet, Species, Starship } from '../types/index';
 
 const api: AxiosInstance = axios.create({
 	baseURL: 'https://swapi.thehiveresistance.com/api',
@@ -30,7 +30,7 @@ const getResourceUrl = (resourceType: ResourceType): string => {
 	return resourceUrls[resourceType];
 };
 
-export const getAllByQuery = async <T>(searchQuery: string, resourceType: ResourceType, page= 1): Promise<T> => {
+export const getAllByQuery = async <T>(searchQuery: string, resourceType: ResourceType, page = 1): Promise<T> => {
 	const url = `${getResourceUrl(resourceType)}/?search=${searchQuery}&page=${page}`;
 return get<T>(url);
 };

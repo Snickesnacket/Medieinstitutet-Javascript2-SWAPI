@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import {  Link, useParams,} from 'react-router-dom'
-import { Vehicles, filmLink, theLink} from '../types'
+import { Vehicle, FilmLink, TheLink} from '../types'
 import {  getById } from '../services/SWAPI'
 import ListGroup from 'react-bootstrap/esm/ListGroup'
 import ListGroupItem from 'react-bootstrap/esm/ListGroupItem'
@@ -9,11 +9,11 @@ import ListGroupItem from 'react-bootstrap/esm/ListGroupItem'
 const VehiclePage = () => {
     const [error, setError] = useState<string|null>(null)
 	const [loading, setLoading] = useState(true)
-    const [data, setData] = useState<Vehicles>()
+    const [data, setData] = useState<Vehicle>()
     const { id } = useParams()
 	const VehicleId = Number(id)
-    const [film, setFilm] = useState<filmLink[]>()
-    const [pilot, setPilot] = useState<theLink[]>()
+    const [film, setFilm] = useState<FilmLink[]>()
+    const [pilot, setPilot] = useState<TheLink[]>()
 
     const getVehicle= async ( VehicleId: number) => {
         setError(null)
@@ -21,7 +21,7 @@ const VehiclePage = () => {
         console.log('hello there!')
 
         try {
-        const data = await getById<Vehicles>('vehicles', VehicleId);
+        const data = await getById<Vehicle>('vehicles', VehicleId);
         console.log("the data",data)
         setData(data)
         setFilm(data.films);

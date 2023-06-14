@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import {  Link, useParams} from 'react-router-dom'
-import { Person, filmLink, theLink} from '../types'
+import { Person, FilmLink, TheLink} from '../types'
 import { getById} from '../services/SWAPI'
 import ListGroup from 'react-bootstrap/esm/ListGroup'
 import ListGroupItem from 'react-bootstrap/esm/ListGroupItem'
@@ -12,10 +12,10 @@ const PersonPage = () => {
     const [data, setData] = useState<Person>()
     const { id } = useParams()
 	const personId = Number(id)
-    const [starships, setStarships] = useState<theLink[]>();
-    const [vehicles, setVehicles] = useState<theLink[]>();
-    const [species, setSpecies] = useState<theLink[]>()
-    const [film, setFilm] = useState<filmLink[]>()
+    const [starships, setStarships] = useState<TheLink[]>();
+    const [vehicles, setVehicles] = useState<TheLink[]>();
+    const [species, setSpecies] = useState<TheLink[]>()
+    const [film, setFilm] = useState<FilmLink[]>()
  
 
     const getPerson = async (personId: number) => {
@@ -55,7 +55,7 @@ const PersonPage = () => {
                         <div>
                         <h2>{data.name}</h2>
                         <p>Eyecolor : {data.eye_color}</p>
-                        <p>Haircolor: {data.hair_coor}</p>
+                        <p>Haircolor: {data.hair_color}</p>
                         <p>Born: {data.birth_year}</p>
                         <p>Height: {data.height}</p>
                         <p>Mass: {data.mass}</p>

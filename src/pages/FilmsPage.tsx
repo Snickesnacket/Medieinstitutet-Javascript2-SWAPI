@@ -2,7 +2,7 @@
 import { useState, useEffect,} from "react";
 import ListGroup from "react-bootstrap/ListGroup";
 import { getAll, getAllByQuery} from "../services/SWAPI";
-import { srchResponseFilm } from "../types";
+import { Film, SearchResponse } from "../types";
 import Pagination from "../components/Pagination";
 import { useSearchParams, Link, } from "react-router-dom";
 import Form from 'react-bootstrap/Form'
@@ -12,9 +12,9 @@ import { Button } from "react-bootstrap";
 export const FilmsPage = () => {
 const [error, setError] = useState<string | null>(null);
 const [loading, setLoading] = useState(true)
-const  [data, setData] = useState<srchResponseFilm|null>(null) //svaret 
+const  [data, setData] = useState<SearchResponse<Film>|null>(null) //svaret 
 const [searchParams, setSearchParams] = useSearchParams({query: '', page:'1'})
-const [searchResult, setSearchResult] = useState<srchResponseFilm|null>(null)
+const [searchResult, setSearchResult] = useState<SearchResponse<Film>|null>(null)
 const page = searchParams.get('page'|| "1")
 const query = searchParams.get('query')
 const [searchInput, setSearchInput] = useState('')
@@ -30,9 +30,9 @@ const getFilms = async (searchQuery: string | "", pageNumber: number | 1) => {
     try {
         let res;
         if (searchQuery) {
-        res = await getAllByQuery<srchResponseFilm>(searchQuery, 'films', pageNumber);
+        res = await getAllByQuery<SearchResponse<Film>>(searchQuery, 'films', pageNumber);
         } else {
-        res = await getAll<srchResponseFilm>('films', pageNumber);
+        res = await getAll<SearchResponse<Film>>('films', pageNumber);
         }
         setData(res);
         setSearchResult(res);

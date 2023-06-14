@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import {  Link, useParams} from 'react-router-dom'
-import { Person, Planet, filmLink} from '../types'
+import { Person, Planet, FilmLink} from '../types'
 import {  getById} from '../services/SWAPI'
 import ListGroup from 'react-bootstrap/esm/ListGroup'
 import ListGroupItem from 'react-bootstrap/esm/ListGroupItem'
@@ -13,7 +13,7 @@ const PlanetPage = () => {
     const { id } = useParams()
 	const planetId = Number(id)
     const [person, setPerson] = useState<Person[]>();
-    const [films, setFilms] = useState<filmLink[]>();
+    const [films, setFilms] = useState<FilmLink[]>();
 
 
     const getPlanet = async ( planetId: number) => {

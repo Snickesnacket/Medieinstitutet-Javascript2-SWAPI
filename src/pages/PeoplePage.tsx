@@ -1,7 +1,7 @@
 import { useState, useEffect,} from "react";
 import ListGroup from "react-bootstrap/ListGroup";
 import { getAll, getAllByQuery} from "../services/SWAPI";
-import { srchResponsePerson } from "../types";
+import { SearchResponse, Person} from "../types";
 import Pagination from "../components/Pagination";
 import { useSearchParams, Link, } from "react-router-dom";
 import Form from 'react-bootstrap/Form'
@@ -10,9 +10,9 @@ import { Button } from "react-bootstrap";
 export const PeoplePage = () => {
 const [error, setError] = useState<string | null>(null);
 const [loading, setLoading] = useState(true)
-const  [data, setData] = useState<srchResponsePerson|null>(null) //svaret 
+const  [data, setData] = useState<SearchResponse<Person>|null>(null) //svaret 
 const [searchParams, setSearchParams] = useSearchParams({query: '', page:'1'})
-const [searchResult, setSearchResult] = useState<srchResponsePerson|null>(null)
+const [searchResult, setSearchResult] = useState<SearchResponse<Person>|null>(null)
 const page = searchParams.get('page'|| "1")
 const query = searchParams.get('query')
 const [searchInput, setSearchInput] = useState('')
@@ -28,9 +28,9 @@ const getPeople = async (searchQuery: string | "", pageNumber: number | 1) => {
     try {
         let res;
         if (searchQuery) {
-        res = await getAllByQuery<srchResponsePerson>(searchQuery, 'people', pageNumber);
+        res = await getAllByQuery<SearchResponse<Person>>(searchQuery, 'people', pageNumber);
         } else {
-        res = await getAll<srchResponsePerson>('people', pageNumber);
+        res = await getAll<SearchResponse<Person>>('people', pageNumber);
         }
         setData(res);
         setSearchResult(res);
