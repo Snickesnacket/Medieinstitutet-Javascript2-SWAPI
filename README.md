@@ -1,5 +1,6 @@
 # Star Wars API
-
+# OBS INGA STYLIGN KRAV FANNS FÖR UPPGIFTEN
+  https://warm-platypus-17262c.netlify.app
 
 ## Betyg: VG 
 
