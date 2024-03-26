@@ -1,5 +1,5 @@
 # Star Wars API
-# OBS INGA STYLIGN KRAV FANNS FÖR UPPGIFTEN
+
   https://warm-platypus-17262c.netlify.app
 
 ## Betyg: VG 
@@ -7,6 +7,7 @@
 ## React, Typescript, React Router, Axios
 
 # Hygienkrav
+Ni behöver inte lägga tid på design för uppgiften 
 Nedan hygienkrav ska vara uppfyllda oavsett betygsnivå.
 
 Använda React (med useState, useEffect och Fetch/axios) och React Router
