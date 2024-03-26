@@ -1,5 +1,5 @@
 # Star Wars API
-https://inquisitive-caramel-ef74da.netlify.app/
+
 
 ## Betyg: VG 
 
