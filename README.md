@@ -1,5 +1,5 @@
 # Star Wars API
-https://sensational-cocada-c4839c.netlify.app
+https://inquisitive-caramel-ef74da.netlify.app/
 
 ## Betyg: VG 
 
